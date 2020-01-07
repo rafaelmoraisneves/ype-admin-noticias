@@ -18,7 +18,15 @@ function getNews(table) {
         cache: false,
         type: 'GET',
         success: function (data) {
-            console.log("-->> Get Noticias: ", data);
+            console.log("-->> XML: ", data);
+
+        
+                const xml = $($.parseXML(data)), // Parse the XML String to a Document, and Wrap jQuery
+                    json = xml.find("string").text(), // Get the text of the XML
+                    jsonObj = $.parseJSON(json); // Parse the JSON String
+            
+                    console.log("-->> JSON: ", jsonObj);
+
             // let tbodyHtml = "";
             // data.data.map(function (d) {
             //     tbodyHtml +=
