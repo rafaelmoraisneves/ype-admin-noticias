@@ -18,35 +18,24 @@ function getNews(table) {
         cache: false,
         type: 'GET',
         success: function (data) {
-            console.log("-->> XML: ", data);
-                const xml = $($.parseXML(data)); // Parse the XML String to a Document, and Wrap jQuery
+            const newsData =  JSON.parse($(data).find('string')[0].textContent);
+            console.log(newsData);
 
-                const json = xml.find("string").text(); // Get the text of the XML
+            let tbodyHtml = "";
+            newsData.map(function (n) {
+                tbodyHtml +=
+                    '<tr class="row-news">' +
+                        '<td class="news__name">' + n.Titulo + '</td>' +
+                        '<td>' + setDropdownByStatus(n.Status) + '</td>' +
+                        '<td class="news___status ' + setStatusStyle(n.Status) + '">'+ n.Status +'</td>' +
+                        '<td>'+ n.CriadoPor +'</td>' +
+                        '<td>'+ n.ModificadoPor + '</td>' +
+                        '<td>'+ n.UltimaModificacao +'</td>' +
+                        '<td class="news__group">' + n.Grupo + '</td>' +
+                    '</tr>';
+            });
 
-                console.log("-->> json", json);
-
-                const jsonObj = $.parseJSON(json); // Parse the JSON String
-            
-                console.log("-->> jsonObj: ", jsonObj);
-
-            // let tbodyHtml = "";
-            // data.data.map(function (d) {
-            //     tbodyHtml +=
-            //         '<tr class="row-news">' +
-            //         '<td class="news__name">' + d[1] + '</td>' +
-            //         '<td>' +
-            //         setDropdownByStatus('publicada') +
-            //         '</td>' +
-            //         '<td class="news___status ' + setStatusStyle("publicada") + '">Publicada</td>' +
-            //         '<td>Nome da usuária</td>' +
-            //         '<td>Nome da usuária</td>' +
-            //         '<td>16/11/2019</td>' +
-            //         '<td class="news__group">Equipe; Supervisão; Diretoria; blablablablabla</td>' +
-            //         '</tr>';
-
-            // });
-
-            // $(table + ' tbody').append(tbodyHtml);
+            $(table + ' tbody').append(tbodyHtml);
         },
         error: function (e) {
             console.log(e);
@@ -57,11 +46,11 @@ function getNews(table) {
 /** Define a classe do texto baseado no status */
 function setStatusStyle(status) {
     switch (status) {
-        case 'publicada':
+        case 'Publicado':
             return 'published'
-        case 'agendada':
+        case 'Agendado':
             return 'scheduled'
-        case 'arquivada':
+        case 'Arquivado':
             return 'archived'
     }
 }
