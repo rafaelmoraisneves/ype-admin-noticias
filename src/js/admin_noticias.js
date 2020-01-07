@@ -56,7 +56,7 @@ function setStatusStyle(status) {
 /** Altera os links do dropdown baseado no status da notícia */
 function setDropdownByStatus(status) {
     return '<div class="dropdown">' +
-        '<img class="news__more dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" src="../src/assets/icons/icone-mais-azul.png">' +
+        '<img class="news__more dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" src="">' +
         '<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">' +
         (status !== 'arquivada' ? '<li><a href="#">Ir para notícia</a></li>' : '<li><a href="#">Publicar</a></li>') +
         '<li><a href="#">Editar</a></li>' +
@@ -65,4 +65,6 @@ function setDropdownByStatus(status) {
         '<li><a href="#">Alterar permissão</a></li>' +
         '</ul>' +
         '</div>';
+
+        // ../src/assets/icons/icone-mais-azul.png
 }
