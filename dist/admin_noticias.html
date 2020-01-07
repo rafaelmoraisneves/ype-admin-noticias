@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Notícias</title>
-    <link rel="stylesheet" href="../src/css/noticias-admin.css">
+    <link rel="stylesheet" href="../src/css/admin_noticias.css">
     <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
@@ -52,7 +52,7 @@
 
             <!-- TABLE 2 -->
             <div role="tabpanel" class="tab-pane" id="wrap-table-news-2">
-                <table id="table-filed-news" class="table custom-table-news table-hover">
+                <table id="table-archived-news" class="table custom-table-news table-hover">
                     <thead>
                         <tr>
                             <th nowrap="nowrap">Nome</th>
@@ -66,6 +66,28 @@
                     </thead>
                     <tbody></tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ARCHIVED MODAL -->
+    <div class="modal fade archived-modal" id="archivedModal" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Notícia arquivada!</h4>
+                </div>
+                <div class="modal-body">
+                    A notícia que você selecionou foi arquivada com sucesso!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="do-btn btn btn-primary" data-dismiss="modal">OK</button>
+                    <button type="button" class="undo-btn btn btn-default">Desfazer</button>
+                </div>
             </div>
         </div>
     </div>
