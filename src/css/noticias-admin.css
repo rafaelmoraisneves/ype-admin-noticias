@@ -1,0 +1,115 @@
+/* .::: FONTS :::. */
+@font-face {
+    font-family: 'Lato-Regular';
+    src: url('../assets/fonts/Lato/Lato-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Lato-Light';
+    src: url('../assets/fonts/Lato/Lato-Light.ttf');
+}
+
+/* .::: HEADER :::. */
+.news-page-header {
+    background-color: #0070b8;
+    height: 64px;
+    color: #fff;
+    font-size: 18px;
+    font-family: Lato-Regular;
+}
+
+.news-page-header p {
+    position: relative;
+    top: 21px;
+    left: 56px;
+    display: inline;
+    cursor: pointer;
+}
+
+.news-page-header img {
+    height: 14px;
+    margin-right: 8px;
+    margin-bottom: 4px;
+}
+
+/* .::: NAVIGATION :::. */
+.nav-news {
+    font-size: 40px;
+    font-family: Lato-Light;
+    color: #b4b4be;
+    font-weight: 300;
+    text-decoration: none;
+}
+
+.nav-news:hover,
+.nav-news:visited {
+    text-decoration: none;
+}
+
+li.active .nav-news {
+    color: #141428;
+}
+
+/* .::: TABLES :::. */
+.custom-table-news {
+    width: 100%
+}
+
+.wrap-tables {
+    padding: 20px;
+}
+
+
+.custom-table-news thead {
+    font-size: 16px;
+    font-family: Lato-Regular;
+}
+
+
+.row-news td {
+    line-height: 48px !important;
+}
+
+
+.news__name {
+    font-size: 20px;
+    font-family: Lato-Light;
+    font-weight: 300;
+}
+
+.row-news {
+    font-size: 16px;
+    font-family: Lato-Regular;
+}
+
+.news__more {
+    height: 24px;
+    cursor: pointer;
+
+}
+
+.news__group {
+    width: 240px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+}
+
+/* .::: DROPDOWN :::. */
+.published {
+    color: #a0d71e;
+}
+
+.scheduled {
+    color: #ef7d00;
+}
+
+.filed {
+    color: #6e6e78;
+}
+
+.dropdown-menu>li>a:focus,
+.dropdown-menu>li>a:hover {
+    background-color: rgba(0, 112, 184, 0.05) !important;
+}

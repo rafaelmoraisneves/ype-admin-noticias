@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Notícias</title>
+    <link rel="stylesheet" href="../src/css/noticias-admin.css">
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="news-page-header">
+        <p><img src="../src/assets/icons/icone-novo-branco.png"> Nova Notícia</p>
+    </div>
+    <div class="wrap-tables container-fluid">
+
+        <!-- NAVIGATION -->
+        <ul class="nav-justified" role="tablist">
+            <li role="presentation" class="active">
+                <a class="nav-news" href="#wrap-table-news-1" aria-controls="news" role="tab"
+                    data-toggle="tab">Notícias</a>
+            </li>
+            <li role="presentation">
+                <a class="nav-news" href="#wrap-table-news-2" aria-controls="profile" role="tab" data-toggle="tab">
+                    Notícias arquivadas
+                </a>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+
+            <!-- TABLE 1 -->
+            <div role="tabpanel" class="table-responsive tab-pane fade in active" id="wrap-table-news-1">
+                <table id="table-news" class="table custom-table-news table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th></th>
+                            <th>Status</th>
+                            <th>Criada por</th>
+                            <th>Modificada por</th>
+                            <th>Última modificação</th>
+                            <th>Grupo</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <!-- TABLE 2 -->
+            <div role="tabpanel" class="tab-pane" id="wrap-table-news-2">
+                <table id="table-filed-news" class="table custom-table-news table-hover">
+                    <thead>
+                        <tr>
+                            <th nowrap="nowrap">Nome</th>
+                            <th></th>
+                            <th>Status</th>
+                            <th>Criada por</th>
+                            <th>Modificada por</th>
+                            <th>Última modificação</th>
+                            <th>Grupo</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="admin_noticias.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>
