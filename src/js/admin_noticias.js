@@ -4,17 +4,15 @@ require('@babel/polyfill');
 console.log('---- admin_noticias webpack v1.0 ----');
 
 
-const newsUrl = '/Servicos/YPE.WebService.asmx/getNoticias?cargo=&novas=true';
-
 $(document).ready(function () {
     getNews('#table-news');
     getNews('#table-archived-news');
 });
 
 
-function getNews(table) {
+function getNews(table, novasNoticias) {
     $.ajax({
-        url: newsUrl,
+        url: '/Servicos/YPE.WebService.asmx/getNoticias?cargo=&novas=' + novasNoticias,
         cache: false,
         type: 'GET',
         success: function (data) {
