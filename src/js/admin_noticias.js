@@ -19,13 +19,15 @@ function getNews(table) {
         type: 'GET',
         success: function (data) {
             console.log("-->> XML: ", data);
+                const xml = $($.parseXML(data)); // Parse the XML String to a Document, and Wrap jQuery
 
-        
-                const xml = $($.parseXML(data)), // Parse the XML String to a Document, and Wrap jQuery
-                    json = xml.find("string").text(), // Get the text of the XML
-                    jsonObj = $.parseJSON(json); // Parse the JSON String
+                const json = xml.find("string").text(); // Get the text of the XML
+
+                console.log("-->> json", json);
+
+                const jsonObj = $.parseJSON(json); // Parse the JSON String
             
-                    console.log("-->> JSON: ", jsonObj);
+                console.log("-->> jsonObj: ", jsonObj);
 
             // let tbodyHtml = "";
             // data.data.map(function (d) {
