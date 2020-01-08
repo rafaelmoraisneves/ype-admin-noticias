@@ -8,13 +8,260 @@
     <title>Notícias</title>
     <!-- <link rel="stylesheet" href="../src/css/admin_noticias.css"> -->
     <!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
-    <link rel="stylesheet" type="text/css" href="/SitePages/src/css/admin_noticias.css">
-    <link rel="stylesheet" type="text/css" href="/SitePages/src/css/teste.css">
+    <!-- <link rel="stylesheet" href="/SitePages/src/css/admin_noticias.css"> -->
 
 
     <style>
-        body {
-            background-color: blueviolet;
+        /* .::: FONTS :::. */
+        @font-face {
+            font-family: 'Lato-Regular';
+            src: url('../assets/fonts/Lato/Lato-Regular.ttf');
+        }
+
+        @font-face {
+            font-family: 'Lato-Light';
+            src: url('../assets/fonts/Lato/Lato-Light.ttf');
+        }
+
+        @font-face {
+            font-family: 'Bree-Serif';
+            src: url('../assets/fonts/Bree_Serif/BreeSerif-Regular.ttf');
+        }
+
+        /* .::: HEADER :::. */
+        .news-page-header {
+            background-color: #0070b8;
+            height: 64px;
+            color: #fff;
+            font-size: 18px;
+            font-family: Lato-Regular;
+        }
+
+        .news-page-header p {
+            position: relative;
+            top: 21px;
+            left: 56px;
+            display: inline;
+            cursor: pointer;
+        }
+
+        .news-page-header img {
+            height: 14px;
+            margin-right: 8px;
+            margin-bottom: 4px;
+        }
+
+        /* .::: NAVIGATION :::. */
+        .nav-news {
+            font-size: 40px;
+            font-family: Lato-Light;
+            color: #b4b4be;
+            font-weight: 300;
+            text-decoration: none;
+        }
+
+        .nav-news:hover,
+        .nav-news:visited {
+            text-decoration: none;
+        }
+
+        li.active .nav-news {
+            color: #141428;
+        }
+
+        /* .::: TABLES :::. */
+        .custom-table-news {
+            width: 100%
+        }
+
+        .wrap-tables {
+            padding: 20px;
+        }
+
+
+        .custom-table-news thead {
+            font-size: 16px;
+            font-family: Lato-Regular;
+        }
+
+
+        .row-news td {
+            line-height: 48px !important;
+        }
+
+
+        .news__name {
+            font-size: 20px;
+            font-family: Lato-Light;
+            font-weight: 300;
+        }
+
+        .row-news {
+            font-size: 16px;
+            font-family: Lato-Regular;
+        }
+
+        .news__more {
+            height: 24px;
+            cursor: pointer;
+
+        }
+
+        .news__group {
+            width: 240px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        /* .::: DROPDOWN :::. */
+        .published {
+            color: #a0d71e;
+        }
+
+        .scheduled {
+            color: #ef7d00;
+        }
+
+        .archived {
+            color: #6e6e78;
+        }
+
+        .dropdown-menu>li>a:focus,
+        .dropdown-menu>li>a:hover {
+            background-color: rgba(0, 112, 184, 0.05) !important;
+        }
+
+        /* .::: MODAL :::. */
+        .archived-modal .modal-title {
+            font-size: 32px !important;
+            font-family: Bree-Serif;
+            font-weight: bold;
+            color: #0070b8;
+        }
+
+        .archived-modal .modal-body {
+            font-size: 16px !important;
+            font-family: Lato-Regular;
+            color: #141428;
+        }
+
+        .archived-modal .modal-footer,
+        .archived-modal .modal-header,
+        .archived-modal .modal-body {
+            border: none !important;
+            text-align: center;
+        }
+
+        .archived-modal .modal-footer .do-btn,
+        .archived-modal .modal-footer .undo-btn {
+            width: 88px;
+            height: 43px;
+        }
+
+
+        /* .::: CREATE PAGE :::. */
+
+        /* Container holding the image and the text */
+        .create-panel {
+            position: relative;
+            /* text-align: center; */
+        }
+
+
+        /* Top left text */
+        .create-panel__buttons {
+            position: absolute;
+            top: 8px;
+            left: 16px;
+
+        }
+
+        .create-panel__header__buttons__button,
+        .create-panel__header__buttons__button--publish {
+            display: inline;
+            line-height: 62px;
+        }
+
+        .create-panel__header__buttons__button {
+            position: relative;
+            left: 40px;
+            float: left;
+            width: 122px;
+            color: #141428;
+            font-family: Lato-Regular;
+            font-size: 16px;
+        }
+
+        .create-panel__header__buttons__button img {
+            height: 16px;
+            margin-right: 8px;
+        }
+
+        .create-panel__header__buttons__button--publish {
+            float: right;
+            height: 64px;
+            width: 122px;
+            background-color: #a0d71e;
+            text-align: center;
+            color: #fff;
+            font-size: 16px;
+            font-family: Lato-Regular;
+        }
+
+        .create-panel__header__buttons__button--publish:hover {
+            text-decoration: none;
+            color: #fff;
+            background-color: #a0d71e8f;
+        }
+
+        .create-panel__header__buttons__button:hover {
+            text-decoration: none;
+            color: #141428;
+
+        }
+
+        .create-panel__name {
+            position: absolute;
+            bottom: 40px;
+            left: 80px;
+            font-size: 40px;
+            font-family: Lato-Light;
+            color: #141428;
+        }
+
+        .create-panel__header {
+            position: absolute;
+            top: 0;
+            height: 64px;
+            width: 100%;
+        }
+
+        .create-panel-options {}
+
+        .create-panel-options__line {
+            background-color: #0070b8;
+            height: 2px;
+            display: block;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+        }
+
+        .create-panel-options__line__button {
+            position: absolute;
+            bottom: -14px;
+            background-color: #0070b8;
+            border-radius: 20px;
+            height: 32px;
+            width: 32px;
+        }
+
+        .create-panel-options__line__button img {
+            width: 16px;
+            height: 16px;
+            margin-top: 8px;
         }
     </style>
 </head>
