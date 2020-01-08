@@ -16,6 +16,7 @@ function getNews(table, novasNoticias) {
         cache: false,
         type: 'GET',
         success: function (data) {
+            console.log('---------------------- RETORNO DA API ------------------ ');
             const newsData =  JSON.parse($(data).find('string')[0].textContent);
             console.log(newsData);
 
