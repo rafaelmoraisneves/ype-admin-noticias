@@ -5,6 +5,7 @@ console.log('---- admin_noticias webpack v1.0 ----');
 
 
 $(document).ready(function () {
+    console.log('---------------------- document ready ------------------ ');
     getNews('#table-news', 'true');
     getNews('#table-archived-news', 'false');
 });
