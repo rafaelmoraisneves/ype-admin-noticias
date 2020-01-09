@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -7,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Notícias</title>
     <!-- <link rel="stylesheet" href="../src/css/admin_noticias.css"> -->
-    <!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <!-- <link rel="stylesheet" href="/SitePages/src/css/admin_noticias.css"> -->
 
 
@@ -15,17 +14,17 @@
         /* .::: FONTS :::. */
         @font-face {
             font-family: 'Lato-Regular';
-            src: url('../assets/fonts/Lato/Lato-Regular.ttf');
+            src: url('/SitePages/src/fonts/Lato/Lato-Regular.ttf');
         }
 
         @font-face {
             font-family: 'Lato-Light';
-            src: url('../assets/fonts/Lato/Lato-Light.ttf');
+            src: url('/SitePages/src/fonts/Lato/Lato-Light.ttf');
         }
 
         @font-face {
             font-family: 'Bree-Serif';
-            src: url('../assets/fonts/Bree_Serif/BreeSerif-Regular.ttf');
+            src: url('/SitePages/src/fonts/Bree_Serif/BreeSerif-Regular.ttf');
         }
 
         /* .::: HEADER :::. */
@@ -45,6 +44,11 @@
             cursor: pointer;
         }
 
+        .news-page-header a {
+           text-decoration: none;
+           color: #fff;
+        }
+
         .news-page-header img {
             height: 14px;
             margin-right: 8px;
@@ -61,8 +65,15 @@
         }
 
         .nav-news:hover,
-        .nav-news:visited {
+        .nav-news:visited,
+        .nav-news:link {
             text-decoration: none;
+            color: #b4b4be;
+        }
+
+        .nav-news-list {
+            margin-top: 64px;
+            width: 60%;
         }
 
         li.active .nav-news {
@@ -75,7 +86,7 @@
         }
 
         .wrap-tables {
-            padding: 20px;
+            padding: 0 30px;
         }
 
 
@@ -263,22 +274,28 @@
             height: 16px;
             margin-top: 8px;
         }
+
+        #wrap-table-news-1, #wrap-table-news-2 { 
+            height: 100%;
+        }
     </style>
 </head>
 
 <body>
-
     <!-- SitePages/src/ -->
     <div class="news-page-header">
         <p>
-            <img src="../src/assets/icons/icone-novo-branco.png"> Nova Notícia
-            <img src="/SitePages/src/Icones/icone-novo-branco.png"> Nova Notícia
+            <a href="#" onclick="newsAdmin.helpers.showCreatePage()">
+                <img src="/SitePages/src/Icones/icone-novo-branco.png">  
+                Nova Notícia
+            </a>
         </p>
     </div>
-    <div class="wrap-tables container-fluid">
 
+    <div id="tablesNews" class="wrap-tables container-fluid">
+        <button onclick="newsAdmin.api.createNews()" class="btn btn-default">Criar notícia</button>
         <!-- NAVIGATION -->
-        <ul class="nav-justified" role="tablist">
+        <ul class="nav-news-list nav-justified" role="tablist">
             <li role="presentation" class="active">
                 <a class="nav-news" href="#wrap-table-news-1" aria-controls="news" role="tab"
                     data-toggle="tab">Notícias</a>
@@ -306,7 +323,10 @@
                             <th>Grupo</th>
                         </tr>
                     </thead>
-                    <tbody></tbody>
+                    <tbody>
+
+
+                    </tbody>
                 </table>
             </div>
 
@@ -330,6 +350,44 @@
         </div>
     </div>
 
+    <div id="createNews" class="container-fluid" style="display: none;">
+        <div class="create-panel">
+            <div class="create-panel__container">
+                <img class="create-panel__banner" src="/SitePages/src/Images/img_placeholder@3x.png" style="width:100%;">
+
+                <div class="create-panel__header">
+                    <div class="create-panel__header__buttons">
+                        <a href="#" class="create-panel__header__buttons__button">
+                            Salvar
+                        </a>
+                        <a href="#" class="create-panel__header__buttons__button">
+                            
+                            <a href="#" onclick="newsAdmin.helpers.showTablesPage()">
+                                <img src="/SitePages/src/Icones/icone-fechar-preto.png">
+                                Cancelar
+                            </a>
+                        </a>
+                        <a href="#" class="create-panel__header__buttons__button--publish">
+                            Publicar
+                        </a>
+
+                    </div>
+                </div>
+                <div class="create-panel__name">
+                    <p>Nome da notícia</p>
+                </div>
+            </div>
+
+            <div class="create-panel-options">
+                <div class="create-panel-options__line">
+                    <a class="create-panel-options__line__button" href="#">
+                        <img src="/SitePages/src/Icones/icone-novo-branco.png">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- ARCHIVED MODAL -->
     <div class="modal fade archived-modal" id="archivedModal" tabindex="-1" role="dialog"
@@ -339,14 +397,16 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Notícia arquivada!</h4>
+                    <h4 class="modal-title">Arquivar notícia</h4>
                 </div>
                 <div class="modal-body">
-                    A notícia que você selecionou foi arquivada com sucesso!
+                    Deseja arquivar a notícia?
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="do-btn btn btn-primary" data-dismiss="modal">OK</button>
-                    <button type="button" class="undo-btn btn btn-default">Desfazer</button>
+                    <button type="button" id="archiveNews" class="do-btn btn btn-primary"
+                        onclick="newsAdmin.api.archiveNews()" data-dismiss="modal">Sim</button>
+                    <button type="button" id="undoNews" class="undo-btn btn btn-default"
+                        data-dismiss="modal">Não</button>
                 </div>
             </div>
         </div>
@@ -354,9 +414,202 @@
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/SitePages/src/js/admin_noticias.js"></script>
-    <!-- <script src="admin_noticias.js"></script> -->
 
+    <script>
+        $(document).ready(function () {
+            newsAdmin.helpers.refreshTables();
+        });
+
+        var newsAdmin = {
+            variables: {
+                jsonNews: "", // JSON com os dados da notícia selecionada
+                idNews: "" // JSON com o ID da notícia selecionada
+            },
+
+            api: {
+                /**
+                 * Recebe as notícias e adiciona na tabela
+                 */
+                getAllNews: function (table, novasNoticias) {
+                    $.ajax({
+                        url: '/Servicos/YPE.WebService.asmx/getNoticias?cargo=&novas=' + novasNoticias,
+                        cache: false,
+                        type: 'GET',
+                        async: false,
+                        success: function (data) {
+                            var newsData = JSON.parse($(data).find('string')[0].textContent);
+                            console.log(newsData);
+
+                            var tbodyHtml = "";
+                            newsData.map(function (news, index) {
+
+                                tbodyHtml +=
+                                    "<tr class='row-news'>" +
+                                    "<td class='news__name'> <input type='hidden' value='" +
+                                    JSON.stringify(news) + "'/>" +
+                                    news.Titulo + '</td>' +
+                                    "<td>" + newsAdmin.helpers.buildDropdownByStatus(news
+                                        .Status) + "</td>" +
+                                    "<td class='news___status " + newsAdmin.helpers
+                                    .setStatusStyle(news.Status) + "'>" + news.Status +
+                                    "</td>" +
+                                    "<td>" + news.CriadoPor + "</td>" +
+                                    "<td>" + news.ModificadoPor + "</td>" +
+                                    "<td>" + newsAdmin.helpers.formatDate(news
+                                        .UltimaModificacao) + "</td>" +
+                                    "<td class='news__group'>" + news.Grupo + "</td>" +
+                                    "</tr>";
+
+                            });
+
+                            $(table + ' tbody').append(tbodyHtml);
+                        },
+                        error: function (e) {
+                            console.log(e);
+                        }
+                    });
+                },
+
+                deleteNews: function () {
+                    if (newsAdmin.variables.idNews !== "") {
+                        $.ajax({
+                            url: '/Servicos/YPE.WebService.asmx/getNoticiaDel?idNoticia=' + newsAdmin
+                                .variables.idNews,
+                            cache: false,
+                            type: 'GET',
+                            success: function (data) {
+                                console.log(data);
+                                newsAdmin.helpers.refreshTables();
+                            },
+                            error: function (e) {
+                                console.log(e);
+                            }
+                        });
+                    }
+                },
+
+                /** Função responsável por arquivar uma notícia*/
+                archiveNews: function () {
+                    console.log("id: ", newsAdmin.variables.idNews)
+                    if (newsAdmin.variables.idNews !== "") {
+                        $.ajax({
+                            url: '/Servicos/YPE.WebService.asmx/getArquivarNoticia?idNoticia=' +
+                                newsAdmin.variables.idNews,
+                            cache: false,
+                            type: 'GET',
+                            success: function (data) {
+                                newsAdmin.helpers.refreshTables();
+                            },
+                            error: function (e) {
+                                console.log(e);
+                            }
+                        });
+                    }
+                },
+
+                /** Função responsável por criar uma notícia
+                 * É necessário passar um json como parâmetro
+                 */
+                createNews: function () {
+                    var objmock =
+                        '{   "Id": "0",   "Titulo": "Nova notíca",   "Status": "Agendado",   "CriadoPor": "Rafael Neves",   "ModificadoPor": "Rafael Neves",   "UltimaModificacao": "2020-01-07T14:54:24",   "Grupo": "Grupo",   "Publicacao": "2020-01-07T02:00:00Z",   "Empresa": "Ype",   "Unidade": "Amparo",   "NoticiaNova": true }';
+                    $.ajax({
+                        url: '/Servicos/YPE.WebService.asmx/postNoticia?noticia=' + objmock,
+                        cache: false,
+                        type: 'GET',
+                        success: function (data) {
+                            newsAdmin.helpers.refreshTables();
+                        },
+                        error: function (e) {
+                            console.log(e);
+                        }
+                    });
+                },
+
+                updateNews: function (jsonNews) {
+                    $.ajax({
+                        url: '/Servicos/YPE.WebService.asmx/postNoticia?noticia=' + jsonNews,
+                        cache: false,
+                        type: 'GET',
+                        success: function (data) {
+                            console.log(data);
+                        },
+                        error: function (e) {
+                            console.log(e);
+                        }
+                    });
+                }
+            },
+
+            helpers: {
+                /** Define a classe do texto baseado no status */
+                setStatusStyle: function (status) {
+                    return {
+                        'Publicado': 'published',
+                        'Arquivado': 'archived',
+                        'Agendado': 'scheduled'
+                    } [status];
+                },
+
+                /** Altera os links do dropdown baseado no status da notícia */
+                buildDropdownByStatus: function (status) {
+                    return '<div class="dropdown custom-dropdown">' +
+                        '<img class="news__more dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" src="/SitePages/src/Icones/icone-mais-azul.png">' +
+                        '<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">' +
+                        (status !== 'Arquivado' ? '<li><a href="#">Ir para notícia</a></li>' :
+                            '<li><a href="#">Publicar</a></li>') +
+                        '<li><a href="#">Editar</a></li>' +
+                        (status !== 'Arquivado' ?
+                            '<li><a class="archiveCurrentNews" href="#" data-toggle="modal" data-target="#archivedModal">Arquivar</a></li>' :
+                            '<li><a class="deleteCurrentNews" href="#" onclick="newsAdmin.api.deleteNews()">Deletar</a></li>'
+                        ) +
+                        '<li><a href="#">Detalhes</a></li>' +
+                        '<li><a href="#">Alterar permissão</a></li>' +
+                        '</ul>' +
+                        '</div>';
+                },
+                handleClickMore: function () {
+                    $(".news__more").click(function () {
+                        newsAdmin.variables.jsonNews = JSON.parse($(this).parent().parent().parent()
+                            .find('input').val());
+                        newsAdmin.variables.idNews = newsAdmin.variables.jsonNews.Id;
+
+                        console.log(newsAdmin.variables.jsonNews);
+                    });
+                },
+
+                formatDate: function (date) {
+                    var newDate = new Date(date) // formated_Date - SDK returned date
+                    var formattedDate = ("0" + newDate.getDate()).substr(-2) + "/" +
+                        ("0" + (newDate.getMonth() + 1)).substr(-2) + "/" + newDate.getFullYear();
+
+                    return formattedDate;
+                },
+
+                /**
+                 * Apaga todos os registros e popula as tabelas novamente
+                 */
+                refreshTables: function () {
+                    $("#table-news tbody, #table-archived-news tbody").empty();
+                    newsAdmin.api.getAllNews('#table-news', 'true');
+                    newsAdmin.api.getAllNews('#table-archived-news', 'false');
+                    newsAdmin.helpers.handleClickMore();
+                    newsAdmin.variables.idNews = "";
+                    newsAdmin.variables.jsonNews = "";
+                },
+
+                showCreatePage: function () {
+                    $("#createNews").show();
+                    $("#tablesNews, .news-page-header").hide();
+                },
+
+                showTablesPage: function () {
+                    $("#createNews").hide();
+                    $("#tablesNews, .news-page-header").show();
+                }
+            }
+        }
+    </script>
 
 </body>
 

@@ -1,5 +1,4 @@
-require('core-js');
-require('@babel/polyfill');
+
 
 console.log('---- admin_noticias webpack v1.0 ----');
 
@@ -16,10 +15,10 @@ function getNews(table, novasNoticias) {
         cache: false,
         type: 'GET',
         success: function (data) {
-            const newsData =  JSON.parse($(data).find('string')[0].textContent);
+            var newsData =  JSON.parse($(data).find('string')[0].textContent);
             console.log(newsData);
 
-            let tbodyHtml = "";
+            var tbodyHtml = "";
             newsData.map(function (n) {
                 tbodyHtml +=
                     '<tr class="row-news">' +
