@@ -45,8 +45,8 @@
         }
 
         .news-page-header a {
-           text-decoration: none;
-           color: #fff;
+            text-decoration: none;
+            color: #fff;
         }
 
         .news-page-header img {
@@ -189,13 +189,13 @@
 
         }
 
-        .create-panel__header__buttons__button,
-        .create-panel__header__buttons__button--publish {
+        .btn-header,
+        .btn-publish {
             display: inline;
             line-height: 62px;
         }
 
-        .create-panel__header__buttons__button {
+        .btn-header {
             position: relative;
             left: 40px;
             float: left;
@@ -205,12 +205,12 @@
             font-size: 16px;
         }
 
-        .create-panel__header__buttons__button img {
+        .btn-header img {
             height: 16px;
             margin-right: 8px;
         }
 
-        .create-panel__header__buttons__button--publish {
+        .btn-publish {
             float: right;
             height: 64px;
             width: 122px;
@@ -221,13 +221,13 @@
             font-family: Lato-Regular;
         }
 
-        .create-panel__header__buttons__button--publish:hover {
+        .btn-publish:hover {
             text-decoration: none;
             color: #fff;
             background-color: #a0d71e8f;
         }
 
-        .create-panel__header__buttons__button:hover {
+        .btn-header:hover {
             text-decoration: none;
             color: #141428;
 
@@ -254,10 +254,12 @@
         .create-panel-options__line {
             background-color: #0070b8;
             height: 2px;
+            width: 87%;
             display: block;
             margin: 0 auto;
             text-align: center;
             position: relative;
+            top: 42px;
         }
 
         .create-panel-options__line__button {
@@ -275,24 +277,542 @@
             margin-top: 8px;
         }
 
-        #wrap-table-news-1, #wrap-table-news-2 { 
+        #wrap-table-news-1,
+        #wrap-table-news-2 {
             height: 100%;
+        }
+
+
+        /* sidebar */
+
+        body {
+            padding-top: 90px;
+        }
+
+        @media (min-width: 768px) {
+            body {
+                padding-top: 0;
+            }
+        }
+
+        @media (min-width: 768px) {
+            body {
+                margin-right: 232px;
+            }
+        }
+
+        .blue {
+            filter: blur(8px);
+            background: white;
+        }
+
+        .navbar.fixed-right {
+            background-color: #FFF;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1030;
+            box-shadow: 0 0 64px 0 rgba(20, 19, 40, 0.3);
+            overflow-y: auto;
+            overflow-x: hidden;
+            display: none;
+        }
+
+        .side-panel-block {
+            display: block !important;
+        }
+
+        .container-submenu {
+            display: none;
+        }
+
+        .navbar {
+            border: none !important;
+        }
+
+        @media (min-width: 1070px) {
+            .navbar.fixed-right {
+                left: auto;
+                width: 450px;
+                height: 100%;
+            }
+        }
+
+        @media (min-width: 1500px) {
+            .navbar.fixed-right {
+                width: 640px;
+                height: 100%;
+                border-radius: 10px 0px 0px 0px;
+            }
+        }
+
+        .submenu-bar {
+            width: 640px;
+            height: 64px;
+            background-color: #e6e6eb;
+            padding: 20px;
+        }
+
+        .submenu-bar .col-md-1 {
+            width: 0px !important;
+            margin-left: 10px;
+        }
+
+        .icone-size img {
+            width: 16px;
+            height: 16px;
+            margin: 0px 5px;
+        }
+
+        .submenu-bar .text {
+            margin-right: 20px;
+            font-size: 16px;
+        }
+
+        .content {
+            padding: 64px;
+        }
+
+        .details-title {
+            color: #0070b8;
+            font-size: 32px;
+            font-family: 'Bree Serif', serif;
+            font-weight: bold;
+        }
+
+        .status-title {
+            font-family: 'Lato', serif;
+            font-size: 24px;
+            font-weight: 300;
+        }
+
+        .content-title {
+            color: #0070b8;
+            font-size: 16px;
+            font-family: 'Lato', serif;
+            margin-top: 40px;
+            margin-bottom: 16px;
+        }
+
+        .status-public {
+            color: #a0d71e;
+            font-size: 16px;
+            font-family: 'Lato', serif;
+            font-weight: bold;
+        }
+
+        .status-expi {
+            color: #e52330;
+            font-size: 16px;
+            font-family: 'Lato', serif;
+            font-weight: bold;
+        }
+
+        .status-date {
+            font-size: 14px;
+            color: #6e6e78;
+            font-family: 'Lato', serif;
+            margin-bottom: 32px;
+        }
+
+        .content-subtitle {
+            font-size: 14px;
+            font-family: 'Lato', serif;
+            color: #141428;
+            margin-bottom: 8px;
+        }
+
+        .content-name {
+            font-family: 'Lato', serif;
+            font-size: 16px;
+            color: #141428;
+            margin-bottom: 4px;
+        }
+
+        #dup {
+            margin-left: 0px;
+            margin-right: 37px;
+        }
+
+        .text-margin {
+            margin-right: 35px;
+        }
+
+        #close img {
+            margin-left: 15px;
+
+        }
+
+
+        /* forms */
+
+        .form-voluntarios {
+            padding: 0 32px;
+            box-sizing: border-box;
+            width: calc(100% - 70px);
+        }
+
+        .voluntarios-form__header {
+            margin-top: 70px;
+            height: 160px;
+            width: 100%;
+            padding: 24px;
+            background-color: #0070b8;
+        }
+
+        .voluntarios-form__title {
+            font-family: BreeSerif;
+            font-size: 24px;
+            font-weight: bold;
+            line-height: 200px;
+            text-align: left;
+            color: white;
+        }
+
+        .voluntarios-form__container {
+            padding: 16px;
+        }
+
+        .container-description {
+            font-family: Lato;
+            font-size: 16px;
+            line-height: 1.5;
+            text-align: left;
+            color: #6e6e78;
+        }
+
+        .form-container {
+            width: 100%;
+            margin-top: 16px;
+        }
+
+        .input__container {
+            margin-bottom: 32px;
+            display: block;
+            position: relative;
+        }
+
+        .input__label {
+            font-family: Lato;
+            font-size: 14px;
+            line-height: 1.57;
+            text-align: left;
+            color: #141428;
+        }
+
+        input:-ms-input-placeholder {
+            font-family: Lato;
+            font-size: 16px;
+            line-height: 1.5;
+            text-align: left;
+            color: #6e6e78;
+        }
+
+        .input:focus {
+            border-bottom: 2px solid #0070b8;
+        }
+
+        input[type=text] {
+            color: #141428;
+            width: 100%;
+            padding: 0 10px;
+            margin: 5px 0;
+            line-height: 1.3;
+            outline: none;
+            box-sizing: border-box;
+            border: none;
+            border-bottom: 2px solid gray;
+        }
+
+        .select__container {
+            position: relative;
+            margin-bottom: 32px;
+        }
+
+        .select-css {
+            position: relative;
+            display: block;
+            font-size: 16px;
+            color: #6e6e78;
+            line-height: 1.3;
+            padding: 0 10px;
+            margin: 5px 0;
+            padding: 0;
+            font-size: 15px;
+            width: 100%;
+            box-sizing: border-box;
+            border: none;
+            outline: none;
+            border-bottom: 1px solid rgba(20, 19, 40, 0.3);
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            appearance: none;
+            outline: none;
+        }
+
+        .select__container .chevron::before {
+            border-style: solid;
+            border-width: 2px 2px 0 0;
+            content: '';
+            display: inline-block;
+            height: 10px;
+            width: 10px;
+            left: 95%;
+            position: absolute;
+            top: 50%;
+            transform: rotate(135deg);
+            vertical-align: top;
+            z-index: 100;
+        }
+
+        .select-css::-ms-expand {
+            display: none;
+        }
+
+        .select-css:hover {
+            border-color: #888;
+        }
+
+        .select-css:focus {
+            border-bottom: 2px solid #0070b8;
+        }
+
+        .select-css option {
+            font-weight: normal;
+        }
+
+        .options__container {
+            padding: 16px 16px 16px 0;
+            position: relative;
+        }
+
+        .container-check {
+            display: block;
+            position: relative;
+            padding-left: 35px;
+            cursor: pointer;
+            font-size: 22px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .containercheck-check input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+
+        .checkmark {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 0;
+            height: 16px;
+            width: 16px;
+            border-radius: 4px;
+            border: solid 1px #141428;
+            background-color: white;
+        }
+
+        .container-check:hover input~.checkmark {
+            background-color: white;
+        }
+
+        .check-label {
+            font-family: BreeSerifSb;
+            font-size: 16px;
+            line-height: 1.5;
+            text-align: left;
+            color: #141428;
+        }
+
+        .container-check input:checked~.checkmark {
+            background-color: #2196F3;
+        }
+
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+
+        .container-check input:checked~.checkmark:after {
+            display: block;
+        }
+
+        .container-check .checkmark:after {
+            left: 5px;
+            top: 1px;
+            width: 5px;
+            height: 9px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+
+        .container-check input[type="checkbox"] {
+            display: none;
+        }
+
+        .form-voluntarios--button {
+            width: 110px;
+            height: 43px;
+            border-radius: 6px;
+            background-color: #0070b8;
+            outline: none;
+            margin-top: 64px;
+            margin-bottom: 80px;
+            cursor: pointer;
+            border: none;
+        }
+
+        .days__text {
+            font-family: Lato;
+            font-size: 16px;
+            line-height: 1.5;
+            text-align: left;
+            color: #141428;
+        }
+
+        .button-text {
+            font-family: Lato;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 1.5;
+            text-align: center;
+            color: white;
+        }
+
+        .input__container input {
+            border: none;
+            border-bottom: 1px solid rgba(20, 19, 40, 0.3);
+            color: #6e6e78;
+            width: 100%;
+            padding: 0 !important;
+            outline: none;
+        }
+
+        @media screen and (max-width: 1024px) {
+            .voluntarios-form__header {
+                height: 80px;
+            }
+
+            .voluntarios-form__title {
+                font-family: BreeSerif;
+                font-size: 18px;
+                line-height: 60px;
+            }
+
+            .container-description {
+                font-size: 14px;
+            }
+
+            .form-container {
+                margin-top: 24px;
+            }
+
+            .form-voluntarios--button {
+                width: 80px;
+                height: 40px;
+                margin-top: 32px;
+                margin-bottom: 32px;
+
+            }
+
+            .button-text {
+                font-family: Lato;
+                font-size: 14px;
+                font-weight: 600;
+                line-height: 1.5;
+                text-align: center;
+                color: white;
+            }
+
+        }
+
+        .button {
+            width: 122px;
+            height: 43px;
+            border-radius: 6px;
+            border: none;
+            margin-right: 5px;
+            font-family: 'Lato', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .button-public {
+            background: #a0d71e;
+            color: white;
+        }
+
+        .button-close {
+            background: white;
+            color: #141428;
+        }
+
+        .content-title-date {
+            color: #0070b8;
+            font-family: 'Lato', sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .copy-link {
+            border: 1px solid black;
+            padding: 20px;
         }
     </style>
 </head>
 
 <body>
+
+    <div id="sidebar">
+        <div class="page__container">
+            <div class="page__title">
+              <h1 class="title">Teste</h1>
+              <button id="public">PUBLICAR</button>
+              <button id="view">VISUALIZAR</button>    
+            </div>
+          </div>
+      
+          <nav id="sidebar-shortcuts" class="navbar fixed-right ype">
+            <div class="submenu-bar">
+              <div class="row">
+                  <div class="col-md-1 icone-size"> <img id="e_dit"src="../src/img/icone-editar-preto.png"></div>
+                <div id="e_dit" class="col-md-1 text"> Editar </div>
+                <div class="col-md-1 icone-size"> <img  id="link"src="../src/img/icone-link-preto-1.png"></div>
+                <div id="link" class="col-md-1 text"> Link </div>
+                <div class="col-md-1 icone-size"> <img id="dup" src="../src/img/icone-duplicar-preto.png"></div>
+                <div id="dup" class="col-md-1 text text-margin"> Duplicar </div>
+                <div class="col-md-1 icone-size"> <img id="close" src="../src/img/icone-fechar-preto.png"></div>
+                <div id="close" class="col-md-1 text"> <span >Fechar</span>  </div>
+              </div>
+            </div>
+            
+            <div class="content">
+              
+            </div>
+          </nav>
+    </div>
     <!-- SitePages/src/ -->
     <div class="news-page-header">
         <p>
             <a href="#" onclick="newsAdmin.helpers.showCreatePage()">
-                <img src="/SitePages/src/Icones/icone-novo-branco.png">  
+                <img src="/SitePages/src/Icones/icone-novo-branco.png">
                 Nova Notícia
             </a>
         </p>
     </div>
 
-    <div id="tablesNews" class="wrap-tables container-fluid">
+    <div id="tablesNews" class="wrap-tables container-fluid" style="display: none;">
         <button onclick="newsAdmin.api.createNews()" class="btn btn-default">Criar notícia</button>
         <!-- NAVIGATION -->
         <ul class="nav-news-list nav-justified" role="tablist">
@@ -353,34 +873,33 @@
     <div id="createNews" class="container-fluid" style="display: none;">
         <div class="create-panel">
             <div class="create-panel__container">
-                <img class="create-panel__banner" src="/SitePages/src/Images/img_placeholder@3x.png" style="width:100%;">
+                <img class="create-panel__banner" src="/SitePages/src/Images/img_placeholder@3x.png"
+                    style="width:100%;">
 
                 <div class="create-panel__header">
-                    <div class="create-panel__header__buttons">
-                        <a href="#" class="create-panel__header__buttons__button">
+                    <div class="container-header">
+                        <a href="#" class="btn-header">
+                            <img src="/SitePages/src/Icones/icone-salvar-cinza.png">
                             Salvar
                         </a>
-                        <a href="#" class="create-panel__header__buttons__button">
-                            
-                            <a href="#" onclick="newsAdmin.helpers.showTablesPage()">
-                                <img src="/SitePages/src/Icones/icone-fechar-preto.png">
-                                Cancelar
-                            </a>
+                        <a href="#" class="btn-header" onclick="newsAdmin.helpers.showTablesPage()">
+                            <img src="/SitePages/src/Icones/icone-fechar-preto.png">
+                            Cancelar
                         </a>
-                        <a href="#" class="create-panel__header__buttons__button--publish">
+                        <a href="#" class="btn-publish" onclick="newsAdmin.api.publishNewNews()">
                             Publicar
                         </a>
 
                     </div>
                 </div>
                 <div class="create-panel__name">
-                    <p>Nome da notícia</p>
+                    <p class="news-name">Nome da notícia</p>
                 </div>
             </div>
 
             <div class="create-panel-options">
                 <div class="create-panel-options__line">
-                    <a class="create-panel-options__line__button" href="#">
+                    <a class="create-panel-options__line__button" href="#" onclick="newsAdmin.sidebar.openSidebar()">
                         <img src="/SitePages/src/Icones/icone-novo-branco.png">
                     </a>
                 </div>
@@ -412,18 +931,49 @@
         </div>
     </div>
 
+   
+
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <script>
         $(document).ready(function () {
             newsAdmin.helpers.refreshTables();
+
+            $("#view").click(function () {
+                newsAdmin.sidebar.viewSidePanel();
+            });
+
+            $("#public").click(function () {
+                newsAdmin.sidebar.publicSidePanel();
+            });
+
+            $("#e_dit").click(function () {
+                newsAdmin.sidebar.editSidePanel();
+            });
+
+            $("#close").click(function () {
+                newsAdmin.sidebar.closeSidePanel();
+            });
+
         });
 
         var newsAdmin = {
             variables: {
                 jsonNews: "", // JSON com os dados da notícia selecionada
-                idNews: "" // JSON com o ID da notícia selecionada
+                idNews: "", // JSON com o ID da notícia selecionada
+
+                // sidebar
+                nomeNews: "Teste",
+                datePublic: "31/07/1999",
+                expiredPublic: "31/07/1999",
+                createNews: "Teste Gabi",
+                createDate: "12/12/1999",
+                ModifyNews: "Teste Gabi2",
+                ModifyDate: "12/12/1999",
+                NewsUnidade: "São Paulo",
+                NewsEmpresa: "Ypê",
+                NewsGrupo: "Diretoria"
             },
 
             api: {
@@ -512,7 +1062,7 @@
                  */
                 createNews: function () {
                     var objmock =
-                        '{   "Id": "0",   "Titulo": "Nova notíca",   "Status": "Agendado",   "CriadoPor": "Rafael Neves",   "ModificadoPor": "Rafael Neves",   "UltimaModificacao": "2020-01-07T14:54:24",   "Grupo": "Grupo",   "Publicacao": "2020-01-07T02:00:00Z",   "Empresa": "Ype",   "Unidade": "Amparo",   "NoticiaNova": true }';
+                        '{   "Id": "0",   "Titulo": "Nova notíca",   "Status": "Publicado",   "CriadoPor": "Rafael Neves",   "ModificadoPor": "Rafael Neves",   "UltimaModificacao": "2020-01-07T14:54:24",   "Grupo": "Grupo",   "Publicacao": "2020-01-07T02:00:00Z",   "Empresa": "Ype",   "Unidade": "Amparo",   "NoticiaNova": true }';
                     $.ajax({
                         url: '/Servicos/YPE.WebService.asmx/postNoticia?noticia=' + objmock,
                         cache: false,
@@ -532,13 +1082,196 @@
                         cache: false,
                         type: 'GET',
                         success: function (data) {
-                            console.log(data);
+                            newsAdmin.helpers.refreshTables();
                         },
                         error: function (e) {
                             console.log(e);
                         }
                     });
+                },
+
+                pusblishArchivedNews: function () {
+                    var jsonNews = newsAdmin.variables.jsonNews;
+                    if (jsonNews) {
+                        jsonNews.Status = 'Publicado';
+                        jsonNews.NoticiaNova = 'true';
+
+                        $.ajax({
+                            url: '/Servicos/YPE.WebService.asmx/postNoticia?noticia=' + JSON.stringify(
+                                jsonNews),
+                            cache: false,
+                            type: 'GET',
+                            success: function (data) {
+                                newsAdmin.helpers.refreshTables();
+                            },
+                            error: function (e) {
+                                console.log(e);
+                            }
+                        });
+                    }
+
                 }
+            },
+
+            publish: {
+                /** Publica uma nova notícia e limpa os campos na tela de criação */
+                publishNewNews: function () {
+                    newsAdmin.api.createNews();
+
+                    /* Campos */
+                    $(".news-name").val(name);
+                }
+            },
+
+            sidebar: {
+                openSidebar: function () {
+                    alert('open sidebar');
+                },
+
+                editSidePanel: function () {
+                    var containerMenu = document.querySelector('.container-submenu');
+                    if (containerMenu) containerMenu.classList.remove("container-submenu");
+
+                    var elementT = document.querySelector('#sidebar-shortcuts');
+                    elementT.classList.add("side-panel-block");
+
+                    var elementP = document.querySelector('.page__container');
+                    elementP.classList.add("blue");
+
+                    var status = '<div class="details-title"> Editar </div> <div class="status-title">' +
+                        newsAdmin.variables.nomeNews + ' </div>' + '<form class="form-container">' +
+                        '<div class="input__container">' +
+                        '<input class="input" placeholder="Editar nome da notícia" type="text" id="tags" name="tags">' +
+                        '</div>' +
+                        '<div class="content-title">Status da notícia</div>' +
+                        '<div class="status-public">Publicada</div>' +
+                        '<div class="status-date">' + newsAdmin.variables.datePublic + '</div>' +
+                        '<div class="status-expi">Expira em</div>' +
+                        '<div class="status-date">' + newsAdmin.variables.expiredPublic + '</div>';
+
+                    var info = '<div class="content-title">Informações da notícia</div>' +
+                        '<div class="content-subtitle">Criado por</div>' + '<div class="content-name">' +
+                            newsAdmin.variables.createNews + '</div>' + '<div class="status-date">' + newsAdmin.variables.createDate + '</div>' +
+                        '<div class="content-subtitle">Modificado por</div>' + '<div class="content-name">' +
+                        ModifyNews + '</div>' + '<div class="status-date">' + newsAdmin.variables.ModifyDate + '</div>';
+
+                    var aud = '<div class="content-title">Audiência </div>' +
+                        '<div class="content-subtitle"> Nome da empresa </div>' +
+                        '<div class="content-name">' + newsAdmin.variables.NewsEmpresa + '</div>' +
+                        '<div class="content-subtitle">Nome da unidade</div>' + '<div class="content-name">' +
+                            newsAdmin.variables.NewsUnidade + '</div>' + '<div class="content-subtitle" >Nome do grupo</div>' +
+                        '<div class="content-name">Equipe: ' + newsAdmin.variables.NewsGrupo + '</div>'
+
+                    document.querySelector('.content').innerHTML = status + info + aud;
+                },
+
+                viewSidePanel: function () {
+                    var containerMenu = document.querySelector('.container-submenu');
+                    if (containerMenu) containerMenu.classList.remove("container-submenu");
+
+                    var elementT = document.querySelector('#sidebar-shortcuts');
+                    elementT.classList.add("side-panel-block");
+
+                    var elementP = document.querySelector('.page__container');
+                    elementP.classList.add("blue");
+
+                    var status = '<div class="details-title"> Detalhes </div> <div class="status-title">' +
+                        newsAdmin.variables.nomeNews + '</div>' +
+                        '<div class="content-title">Status da notícia</div>' +
+                        '<div class="status-public">Publicada</div>' +
+                        '<div class="status-date">' +  newsAdmin.variables.datePublic + '</div>' +
+                        '<div class="status-expi">Expira em</div>' +
+                        '<div class="status-date">' +  newsAdmin.variables.expiredPublic + '</div>';
+
+                    var info = '<div class="content-title">Informações da notícia</div>' +
+                        '<div class="content-subtitle">Criado por</div>' + '<div class="content-name">' +
+                            newsAdmin.variables.createNews + '</div>' + '<div class="status-date">' +  newsAdmin.variables.createDate + '</div>' +
+                        '<div class="content-subtitle">Modificado por</div>' + '<div class="content-name">' +
+                            newsAdmin.variables.ModifyNews + '</div>' + '<div class="status-date">' +  newsAdmin.variables.ModifyDate + '</div>';
+
+                    var aud = '<div class="content-title">Audiência </div>' +
+                        '<div class="content-subtitle"> Nome da empresa </div>' +
+                        '<div class="content-name">' +  newsAdmin.variables.NewsEmpresa + '</div>' +
+                        '<div class="content-subtitle">Nome da unidade</div>' + '<div class="content-name">' +
+                            newsAdmin.variables.NewsUnidade + '</div>' + '<div class="content-subtitle" >Nome do grupo</div>' +
+                        '<div class="content-name">Equipe: ' +  newsAdmin.variables.NewsGrupo + '</div>'
+
+                    document.querySelector('.content').innerHTML = status + info + aud;
+                },
+
+                publicSidePanel: function () {
+                    console.log('publicSidePanel')
+                    var element = document.querySelector('#sidebar-shortcuts');
+                    element.classList.add("side-panel-block");
+                    var element = document.querySelector('.submenu-bar');
+                    element.classList.add("container-submenu");
+                    var element = document.querySelector('.page__container');
+                    element.classList.add("blue");
+
+                    var status =
+                        '<div class="details-title"> Publicar notícia </div> <div class="status-title"> Nome da Notícia </div>' +
+                        '<div class="content-title">Agende sua notícia</div>';
+                    var info = '<div class="content-subtitle">Data de publicação</div>';
+                    var date = '<form class="form-container">' + '<div class="input__container">' +
+                        '<input class="input" placeholder="Digite seu nome" type="date" data-date-inline-picker="true" id="date" name="date">' +
+                        '</div>'
+                    var status_1 =
+                        '<div class="content-title">Ajude as pessoas a encontrarem sua notícia</div>';
+                    var info_1 = '<div class="content-subtitle">Adicione tags na sua notícia</div>';
+                    var date_1 = '<form class="form-container">' + '<div class="input__container">' +
+                        '<input class="input" placeholder="Digite o nome da tag" type="text" id="tags" name="tags">' +
+                        '</div>'
+                    var status_2 = '<div class="content-title">Defina a audiência</div>';
+                    var info_2 = '<div class="content-subtitle">Empresa</div>';
+                    var date_2 = '<form class="form-container">' + '<div class="input__container">' +
+                        '<span class="chevron"></span>' +
+                        '<select class="select-css" name="secondQuestion" id="secondQuestion">' +
+                        '<option value="">Escolha a empresa</option>' + '<option value="yes">Sim</option>' +
+                        '</select>' + '</div>'
+                    var info_3 = '<div class="content-subtitle">Unidade</div>';
+                    var date_3 = '<form class="form-container">' + '<div class="input__container">' +
+                        '<span class="chevron"></span>' +
+                        '<select class="select-css" name="secondQuestion" id="secondQuestion">' +
+                        '<option value="">Escolha a a unidade</option>' + '<option value="yes">Sim</option>' +
+                        '</select>' + '</div>'
+                    var info_4 = '<div class="content-subtitle">Grupo</div>';
+                    var date_4 = '<form class="form-container">' + '<div class="input__container">' +
+                        '<span class="chevron"></span>' +
+                        '<select class="select-css" name="secondQuestion" id="secondQuestion">' +
+                        '<option value="">Escolha o grupo</option>' + '<option value="yes">Sim</option>' +
+                        '</select>' + '</div>'
+                    var button =
+                        '<i onclick="publicSucessSidePanel()" id="public-sucess" class="button button-public"> PUBLICAR </i>' +
+                        '<i  onclick="closeSidePanel()" id="close" class="button button-close">CANCELAR</i>'
+                    document.querySelector('.content').innerHTML = status + info + date + status_1 + info_1 +
+                        date_1 + status_2 + info_2 + date_2 + info_3 + date_3 + info_4 + date_4 + button;
+                },
+
+                closeSidePanel: function () {
+                    var element = document.querySelector('#sidebar-shortcuts');
+                    element.classList.remove("side-panel-block");
+                    var element1 = document.querySelector('.page__container');
+                    element1.classList.remove("blue");
+                },
+
+                publicSucessSidePanel: function () {
+                    var element = document.querySelector('#sidebar-shortcuts');
+                    element.classList.add("side-panel-block");
+                    var element1 = document.querySelector('.submenu-bar');
+                    element1.classList.add("container-submenu");
+                    var element2 = document.querySelector('.page__container');
+                    element2.classList.add("blue");
+                    var status =
+                        '<div class="details-title"> Notícia publicada </div> <div class="status-title"> Nome da Notícia </div>' +
+                        '<div class="content-title-date">Data de publicação: 13/11/2019</div>';
+                    var info = '<div class="content-subtitle">Endereço da notícia</div>';
+                    var link = '<div class="copy-link">link</div>';
+                    var button =
+                        '<button onclick="closeSidePanel()" id="close" class="button button-close">FECHAR</button>'
+                    document.querySelector('.content').innerHTML = status + info + link + button;
+                }
+
+
             },
 
             helpers: {
@@ -557,7 +1290,8 @@
                         '<img class="news__more dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" src="/SitePages/src/Icones/icone-mais-azul.png">' +
                         '<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">' +
                         (status !== 'Arquivado' ? '<li><a href="#">Ir para notícia</a></li>' :
-                            '<li><a href="#">Publicar</a></li>') +
+                            '<li><a onclick="newsAdmin.api.pusblishArchivedNews()" href="#">Publicar</a></li>'
+                        ) +
                         '<li><a href="#">Editar</a></li>' +
                         (status !== 'Arquivado' ?
                             '<li><a class="archiveCurrentNews" href="#" data-toggle="modal" data-target="#archivedModal">Arquivar</a></li>' :
