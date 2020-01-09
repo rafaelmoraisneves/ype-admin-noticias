@@ -285,21 +285,21 @@
 
         /* sidebar */
 
-        body {
+        /* body {
             padding-top: 90px;
-        }
+        } */
 
-        @media (min-width: 768px) {
+        /* @media (min-width: 768px) {
             body {
                 padding-top: 0;
             }
-        }
+        } */
 
-        @media (min-width: 768px) {
+        /* @media (min-width: 768px) {
             body {
                 margin-right: 232px;
             }
-        }
+        } */
 
         .blue {
             filter: blur(8px);
@@ -354,9 +354,8 @@
             padding: 20px;
         }
 
-        .submenu-bar .col-md-1 {
-            width: 0px !important;
-            margin-left: 10px;
+        .submenu-bar .col-md-2 {
+            padding: 0 !important;
         }
 
         .icone-size img {
@@ -377,12 +376,12 @@
         .details-title {
             color: #0070b8;
             font-size: 32px;
-            font-family: 'Bree Serif', serif;
+            font-family: Bree-Serif;
             font-weight: bold;
         }
 
         .status-title {
-            font-family: 'Lato', serif;
+            font-family: Lato-Regular;
             font-size: 24px;
             font-weight: 300;
         }
@@ -390,7 +389,7 @@
         .content-title {
             color: #0070b8;
             font-size: 16px;
-            font-family: 'Lato', serif;
+            font-family: Lato-Regular;
             margin-top: 40px;
             margin-bottom: 16px;
         }
@@ -398,33 +397,33 @@
         .status-public {
             color: #a0d71e;
             font-size: 16px;
-            font-family: 'Lato', serif;
+            font-family: Lato-Regular;
             font-weight: bold;
         }
 
         .status-expi {
             color: #e52330;
             font-size: 16px;
-            font-family: 'Lato', serif;
+            font-family: Lato-Regular;
             font-weight: bold;
         }
 
         .status-date {
             font-size: 14px;
             color: #6e6e78;
-            font-family: 'Lato', serif;
+            font-family: Lato-Regular;
             margin-bottom: 32px;
         }
 
         .content-subtitle {
             font-size: 14px;
-            font-family: 'Lato', serif;
+            font-family: Lato-Regular;
             color: #141428;
             margin-bottom: 8px;
         }
 
         .content-name {
-            font-family: 'Lato', serif;
+            font-family: Lato-Regular;
             font-size: 16px;
             color: #141428;
             margin-bottom: 4px;
@@ -743,7 +742,7 @@
             border-radius: 6px;
             border: none;
             margin-right: 5px;
-            font-family: 'Lato', sans-serif;
+            font-family: Lato-Regular;
             font-weight: 600;
             font-size: 16px;
         }
@@ -760,7 +759,7 @@
 
         .content-title-date {
             color: #0070b8;
-            font-family: 'Lato', sans-serif;
+            font-family: Lato-Regular;
             font-size: 16px;
             font-weight: bold;
         }
@@ -775,137 +774,153 @@
 <body>
 
     <div id="sidebar">
-        <div class="page__container">
-            <div class="page__title">
-              <h1 class="title">Teste</h1>
-              <button id="public">PUBLICAR</button>
-              <button id="view">VISUALIZAR</button>    
-            </div>
-          </div>
-      
-          <nav id="sidebar-shortcuts" class="navbar fixed-right ype">
+        <nav id="sidebar-shortcuts" class="navbar fixed-right ype">
             <div class="submenu-bar">
-              <div class="row">
-                  <div class="col-md-1 icone-size"> <img id="e_dit"src="../src/img/icone-editar-preto.png"></div>
-                <div id="e_dit" class="col-md-1 text"> Editar </div>
-                <div class="col-md-1 icone-size"> <img  id="link"src="../src/img/icone-link-preto-1.png"></div>
-                <div id="link" class="col-md-1 text"> Link </div>
-                <div class="col-md-1 icone-size"> <img id="dup" src="../src/img/icone-duplicar-preto.png"></div>
-                <div id="dup" class="col-md-1 text text-margin"> Duplicar </div>
-                <div class="col-md-1 icone-size"> <img id="close" src="../src/img/icone-fechar-preto.png"></div>
-                <div id="close" class="col-md-1 text"> <span >Fechar</span>  </div>
-              </div>
-            </div>
-            
-            <div class="content">
-              
-            </div>
-          </nav>
-    </div>
-    <!-- SitePages/src/ -->
-    <div class="news-page-header">
-        <p>
-            <a href="#" onclick="newsAdmin.helpers.showCreatePage()">
-                <img src="/SitePages/src/Icones/icone-novo-branco.png">
-                Nova Notícia
-            </a>
-        </p>
-    </div>
-
-    <div id="tablesNews" class="wrap-tables container-fluid" style="display: none;">
-        <button onclick="newsAdmin.api.createNews()" class="btn btn-default">Criar notícia</button>
-        <!-- NAVIGATION -->
-        <ul class="nav-news-list nav-justified" role="tablist">
-            <li role="presentation" class="active">
-                <a class="nav-news" href="#wrap-table-news-1" aria-controls="news" role="tab"
-                    data-toggle="tab">Notícias</a>
-            </li>
-            <li role="presentation">
-                <a class="nav-news" href="#wrap-table-news-2" aria-controls="profile" role="tab" data-toggle="tab">
-                    Notícias arquivadas
-                </a>
-            </li>
-        </ul>
-
-        <div class="tab-content">
-
-            <!-- TABLE 1 -->
-            <div role="tabpanel" class="table-responsive tab-pane fade in active" id="wrap-table-news-1">
-                <table id="table-news" class="table custom-table-news table-hover">
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th></th>
-                            <th>Status</th>
-                            <th>Criada por</th>
-                            <th>Modificada por</th>
-                            <th>Última modificação</th>
-                            <th>Grupo</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- TABLE 2 -->
-            <div role="tabpanel" class="tab-pane" id="wrap-table-news-2">
-                <table id="table-archived-news" class="table custom-table-news table-hover">
-                    <thead>
-                        <tr>
-                            <th nowrap="nowrap">Nome</th>
-                            <th></th>
-                            <th>Status</th>
-                            <th>Criada por</th>
-                            <th>Modificada por</th>
-                            <th>Última modificação</th>
-                            <th>Grupo</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <div id="createNews" class="container-fluid" style="display: none;">
-        <div class="create-panel">
-            <div class="create-panel__container">
-                <img class="create-panel__banner" src="/SitePages/src/Images/img_placeholder@3x.png"
-                    style="width:100%;">
-
-                <div class="create-panel__header">
-                    <div class="container-header">
-                        <a href="#" class="btn-header">
-                            <img src="/SitePages/src/Icones/icone-salvar-cinza.png">
-                            Salvar
+                <div class="row">
+                    <div class="col-md-2 icone-size">
+                        <a href="#" onclick="newsAdmin.sidebar.editSidePanel()">
+                            <img src="/SitePages/src/Icones/icone-editar-preto.png">
+                            Editar
                         </a>
-                        <a href="#" class="btn-header" onclick="newsAdmin.helpers.showTablesPage()">
+                    </div>
+
+                    <div class="col-md-2 icone-size">
+                        <a href="#" onclick="newsAdmin.sidebar.editSidePanel()">
+                            <img src="/SitePages/src/Icones/icone-link-preto-1.png">
+                            Link
+                        </a>
+                    </div>
+
+
+                    <div class="col-md-2 icone-size">
+                        <a href="#" onclick="newsAdmin.sidebar.editSidePanel()">
+                            <img src="/SitePages/src/Icones/icone-duplicar-preto.png">
+                            Duplicar
+                        </a>
+                    </div>
+
+                    <div class="col-md-2 icone-size">
+                        <a href="#" onclick="newsAdmin.sidebar.closeSidePanel()">
                             <img src="/SitePages/src/Icones/icone-fechar-preto.png">
-                            Cancelar
+                            Fechar
                         </a>
-                        <a href="#" class="btn-publish" onclick="newsAdmin.api.publishNewNews()">
-                            Publicar
-                        </a>
-
                     </div>
                 </div>
-                <div class="create-panel__name">
-                    <p class="news-name">Nome da notícia</p>
-                </div>
             </div>
 
-            <div class="create-panel-options">
-                <div class="create-panel-options__line">
-                    <a class="create-panel-options__line__button" href="#" onclick="newsAdmin.sidebar.openSidebar()">
-                        <img src="/SitePages/src/Icones/icone-novo-branco.png">
+            <div class="content">
+
+            </div>
+        </nav>
+    </div>
+    <!-- SitePages/src/ -->
+    <div id="firstPage">
+        <div class="news-page-header">
+            <p>
+                <a href="#" onclick="newsAdmin.helpers.showCreatePage()">
+                    <img src="/SitePages/src/Icones/icone-novo-branco.png">
+                    Nova Notícia
+                </a>
+            </p>
+        </div>
+
+        <div id="tablesNews" class="wrap-tables container-fluid">
+            <button onclick="newsAdmin.api.createNews()" class="btn btn-default">Criar notícia</button>
+            <!-- NAVIGATION -->
+            <ul class="nav-news-list nav-justified" role="tablist">
+                <li role="presentation" class="active">
+                    <a class="nav-news" href="#wrap-table-news-1" aria-controls="news" role="tab"
+                        data-toggle="tab">Notícias</a>
+                </li>
+                <li role="presentation">
+                    <a class="nav-news" href="#wrap-table-news-2" aria-controls="profile" role="tab" data-toggle="tab">
+                        Notícias arquivadas
                     </a>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+
+                <!-- TABLE 1 -->
+                <div role="tabpanel" class="table-responsive tab-pane fade in active" id="wrap-table-news-1">
+                    <table id="table-news" class="table custom-table-news table-hover">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th></th>
+                                <th>Status</th>
+                                <th>Criada por</th>
+                                <th>Modificada por</th>
+                                <th>Última modificação</th>
+                                <th>Grupo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- TABLE 2 -->
+                <div role="tabpanel" class="tab-pane" id="wrap-table-news-2">
+                    <table id="table-archived-news" class="table custom-table-news table-hover">
+                        <thead>
+                            <tr>
+                                <th nowrap="nowrap">Nome</th>
+                                <th></th>
+                                <th>Status</th>
+                                <th>Criada por</th>
+                                <th>Modificada por</th>
+                                <th>Última modificação</th>
+                                <th>Grupo</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="createNews" class="container-fluid" style="display: none;">
+            <div class="create-panel">
+                <div class="create-panel__container">
+                    <img class="create-panel__banner" src="/SitePages/src/Images/img_placeholder@3x.png"
+                        style="width:100%;">
+
+                    <div class="create-panel__header">
+                        <div class="container-header">
+                            <a href="#" class="btn-header">
+                                <img src="/SitePages/src/Icones/icone-salvar-cinza.png">
+                                Salvar
+                            </a>
+                            <a href="#" class="btn-header" onclick="newsAdmin.helpers.showTablesPage()">
+                                <img src="/SitePages/src/Icones/icone-fechar-preto.png">
+                                Cancelar
+                            </a>
+                            <a href="#" class="btn-publish" onclick="newsAdmin.api.publishNewNews()">
+                                Publicar
+                            </a>
+
+                        </div>
+                    </div>
+                    <div class="create-panel__name">
+                        <p class="news-name">Nome da notícia</p>
+                    </div>
+                </div>
+
+                <div class="create-panel-options">
+                    <div class="create-panel-options__line">
+                        <a class="create-panel-options__line__button" href="#"
+                            onclick="newsAdmin.sidebar.openSidebar()">
+                            <img src="/SitePages/src/Icones/icone-novo-branco.png">
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
 
 
     <!-- ARCHIVED MODAL -->
@@ -931,7 +946,7 @@
         </div>
     </div>
 
-   
+
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -948,13 +963,13 @@
                 newsAdmin.sidebar.publicSidePanel();
             });
 
-            $("#e_dit").click(function () {
-                newsAdmin.sidebar.editSidePanel();
-            });
+            // $("#e_dit").click(function () {
+            //     newsAdmin.sidebar.editSidePanel();
+            // });
 
-            $("#close").click(function () {
-                newsAdmin.sidebar.closeSidePanel();
-            });
+            // $("#close").click(function () {
+            //     newsAdmin.sidebar.closeSidePanel();
+            // });
 
         });
 
@@ -964,16 +979,8 @@
                 idNews: "", // JSON com o ID da notícia selecionada
 
                 // sidebar
-                nomeNews: "Teste",
-                datePublic: "31/07/1999",
                 expiredPublic: "31/07/1999",
-                createNews: "Teste Gabi",
-                createDate: "12/12/1999",
-                ModifyNews: "Teste Gabi2",
-                ModifyDate: "12/12/1999",
-                NewsUnidade: "São Paulo",
-                NewsEmpresa: "Ypê",
-                NewsGrupo: "Diretoria"
+                createDate: "12/12/1999"
             },
 
             api: {
@@ -1129,38 +1136,44 @@
                 },
 
                 editSidePanel: function () {
+                    console.log("editSidePanel")
                     var containerMenu = document.querySelector('.container-submenu');
                     if (containerMenu) containerMenu.classList.remove("container-submenu");
 
                     var elementT = document.querySelector('#sidebar-shortcuts');
                     elementT.classList.add("side-panel-block");
 
-                    var elementP = document.querySelector('.page__container');
+                    var elementP = document.querySelector('#firstPage');
                     elementP.classList.add("blue");
 
                     var status = '<div class="details-title"> Editar </div> <div class="status-title">' +
-                        newsAdmin.variables.nomeNews + ' </div>' + '<form class="form-container">' +
+                        newsAdmin.variables.jsonNews.Titulo + ' </div>' + '<form class="form-container">' +
                         '<div class="input__container">' +
                         '<input class="input" placeholder="Editar nome da notícia" type="text" id="tags" name="tags">' +
                         '</div>' +
                         '<div class="content-title">Status da notícia</div>' +
                         '<div class="status-public">Publicada</div>' +
-                        '<div class="status-date">' + newsAdmin.variables.datePublic + '</div>' +
+                        '<div class="status-date">' + newsAdmin.helpers.formatDate(newsAdmin.variables.jsonNews.Publicacao)  + '</div>' +
                         '<div class="status-expi">Expira em</div>' +
                         '<div class="status-date">' + newsAdmin.variables.expiredPublic + '</div>';
 
                     var info = '<div class="content-title">Informações da notícia</div>' +
                         '<div class="content-subtitle">Criado por</div>' + '<div class="content-name">' +
-                            newsAdmin.variables.createNews + '</div>' + '<div class="status-date">' + newsAdmin.variables.createDate + '</div>' +
+                        newsAdmin.variables.jsonNews.CriadoPor + '</div>' + '<div class="status-date">' +
+                        newsAdmin
+                        .variables.createDate + '</div>' +
                         '<div class="content-subtitle">Modificado por</div>' + '<div class="content-name">' +
-                        ModifyNews + '</div>' + '<div class="status-date">' + newsAdmin.variables.ModifyDate + '</div>';
+                        newsAdmin.variables.jsonNews.ModificadoPor + '</div>' + '<div class="status-date">' +
+                        newsAdmin
+                        .variables.jsonNews.UltimaModificacao + '</div>';
 
                     var aud = '<div class="content-title">Audiência </div>' +
                         '<div class="content-subtitle"> Nome da empresa </div>' +
-                        '<div class="content-name">' + newsAdmin.variables.NewsEmpresa + '</div>' +
+                        '<div class="content-name">' + newsAdmin.variables.jsonNews.Empresa + '</div>' +
                         '<div class="content-subtitle">Nome da unidade</div>' + '<div class="content-name">' +
-                            newsAdmin.variables.NewsUnidade + '</div>' + '<div class="content-subtitle" >Nome do grupo</div>' +
-                        '<div class="content-name">Equipe: ' + newsAdmin.variables.NewsGrupo + '</div>'
+                        newsAdmin.variables.jsonNews.Unidade + '</div>' +
+                        '<div class="content-subtitle" >Nome do grupo</div>' +
+                        '<div class="content-name">Equipe: ' + newsAdmin.variables.jsonNews.Grupo + '</div>'
 
                     document.querySelector('.content').innerHTML = status + info + aud;
                 },
@@ -1172,29 +1185,33 @@
                     var elementT = document.querySelector('#sidebar-shortcuts');
                     elementT.classList.add("side-panel-block");
 
-                    var elementP = document.querySelector('.page__container');
+                    var elementP = document.querySelector('#firstPage');
                     elementP.classList.add("blue");
 
                     var status = '<div class="details-title"> Detalhes </div> <div class="status-title">' +
-                        newsAdmin.variables.nomeNews + '</div>' +
-                        '<div class="content-title">Status da notícia</div>' +
+                        newsAdmin.variables.jsonNews.Titulo + '</div>' +
+                        '<div class="content-title">' + newsAdmin.variables.jsonNews.Status + '</div>' +
                         '<div class="status-public">Publicada</div>' +
-                        '<div class="status-date">' +  newsAdmin.variables.datePublic + '</div>' +
+                        '<div class="status-date">' + newsAdmin.helpers.formatDate(newsAdmin.variables.jsonNews.Publicacao) + '</div>' +
                         '<div class="status-expi">Expira em</div>' +
-                        '<div class="status-date">' +  newsAdmin.variables.expiredPublic + '</div>';
+                        '<div class="status-date">' + newsAdmin.variables.expiredPublic + '</div>';
 
                     var info = '<div class="content-title">Informações da notícia</div>' +
                         '<div class="content-subtitle">Criado por</div>' + '<div class="content-name">' +
-                            newsAdmin.variables.createNews + '</div>' + '<div class="status-date">' +  newsAdmin.variables.createDate + '</div>' +
+                        newsAdmin.variables.jsonNews.CriadoPor + '</div>' + '<div class="status-date">' +
+                        newsAdmin
+                        .variables.createDate + '</div>' +
                         '<div class="content-subtitle">Modificado por</div>' + '<div class="content-name">' +
-                            newsAdmin.variables.ModifyNews + '</div>' + '<div class="status-date">' +  newsAdmin.variables.ModifyDate + '</div>';
+                        newsAdmin.variables.jsonNews.ModificadoPor + '</div>' + '<div class="status-date">' +
+                        newsAdmin.variables.jsonNews.UltimaModificacao + '</div>';
 
                     var aud = '<div class="content-title">Audiência </div>' +
                         '<div class="content-subtitle"> Nome da empresa </div>' +
-                        '<div class="content-name">' +  newsAdmin.variables.NewsEmpresa + '</div>' +
+                        '<div class="content-name">' + newsAdmin.variables.jsonNews.Empresa + '</div>' +
                         '<div class="content-subtitle">Nome da unidade</div>' + '<div class="content-name">' +
-                            newsAdmin.variables.NewsUnidade + '</div>' + '<div class="content-subtitle" >Nome do grupo</div>' +
-                        '<div class="content-name">Equipe: ' +  newsAdmin.variables.NewsGrupo + '</div>'
+                        newsAdmin.variables.jsonNews.Unidade + '</div>' +
+                        '<div class="content-subtitle" >Nome do grupo</div>' +
+                        '<div class="content-name">Equipe: ' + newsAdmin.variables.jsonNews.Grupo + '</div>'
 
                     document.querySelector('.content').innerHTML = status + info + aud;
                 },
@@ -1205,7 +1222,7 @@
                     element.classList.add("side-panel-block");
                     var element = document.querySelector('.submenu-bar');
                     element.classList.add("container-submenu");
-                    var element = document.querySelector('.page__container');
+                    var element = document.querySelector('#firstPage');
                     element.classList.add("blue");
 
                     var status =
@@ -1241,8 +1258,8 @@
                         '<option value="">Escolha o grupo</option>' + '<option value="yes">Sim</option>' +
                         '</select>' + '</div>'
                     var button =
-                        '<i onclick="publicSucessSidePanel()" id="public-sucess" class="button button-public"> PUBLICAR </i>' +
-                        '<i  onclick="closeSidePanel()" id="close" class="button button-close">CANCELAR</i>'
+                        '<i onclick="newsAdmin.sidepanel.publicSucessSidePanel()" id="public-sucess" class="button button-public"> PUBLICAR </i>' +
+                        '<i  onclick="newsAdmin.sidebar.closeSidePanel()" id="close" class="button button-close">CANCELAR</i>'
                     document.querySelector('.content').innerHTML = status + info + date + status_1 + info_1 +
                         date_1 + status_2 + info_2 + date_2 + info_3 + date_3 + info_4 + date_4 + button;
                 },
@@ -1250,8 +1267,10 @@
                 closeSidePanel: function () {
                     var element = document.querySelector('#sidebar-shortcuts');
                     element.classList.remove("side-panel-block");
-                    var element1 = document.querySelector('.page__container');
+                    var element1 = document.querySelector('#firstPage');
                     element1.classList.remove("blue");
+
+                    newsAdmin.variables.jsonNews = "";
                 },
 
                 publicSucessSidePanel: function () {
@@ -1259,7 +1278,7 @@
                     element.classList.add("side-panel-block");
                     var element1 = document.querySelector('.submenu-bar');
                     element1.classList.add("container-submenu");
-                    var element2 = document.querySelector('.page__container');
+                    var element2 = document.querySelector('#firstPage');
                     element2.classList.add("blue");
                     var status =
                         '<div class="details-title"> Notícia publicada </div> <div class="status-title"> Nome da Notícia </div>' +
@@ -1297,7 +1316,7 @@
                             '<li><a class="archiveCurrentNews" href="#" data-toggle="modal" data-target="#archivedModal">Arquivar</a></li>' :
                             '<li><a class="deleteCurrentNews" href="#" onclick="newsAdmin.api.deleteNews()">Deletar</a></li>'
                         ) +
-                        '<li><a href="#">Detalhes</a></li>' +
+                        '<li><a href="#" onclick="newsAdmin.sidebar.viewSidePanel()">Detalhes</a></li>' +
                         '<li><a href="#">Alterar permissão</a></li>' +
                         '</ul>' +
                         '</div>';
