@@ -74,6 +74,15 @@
         .nav-news-list {
             margin-top: 64px;
             width: 60%;
+            padding-left: 0;
+        }
+
+        .nav-news-list li:nth-child(1) {
+            width: 190px !important;
+        }
+
+        .nav-news-list li:nth-child(2) {
+            width: 400px !important;
         }
 
         li.active .nav-news {
@@ -144,6 +153,10 @@
             background-color: rgba(0, 112, 184, 0.05) !important;
         }
 
+        .custom-dropdown {
+            padding-top: 12px;
+        }
+
         /* .::: MODAL :::. */
         .archived-modal .modal-title {
             font-size: 32px !important;
@@ -177,7 +190,7 @@
         /* Container holding the image and the text */
         .create-panel {
             position: relative;
-            /* text-align: center; */
+            cursor: pointer;
         }
 
 
@@ -187,6 +200,12 @@
             top: 8px;
             left: 16px;
 
+        }
+
+        .create-panel__banner {
+            width: 1920px;
+            height: 480px;
+            object-fit: cover;
         }
 
         .btn-header,
@@ -301,7 +320,7 @@
             }
         } */
 
-        .blue {
+        .blur {
             filter: blur(8px);
             background: white;
         }
@@ -419,7 +438,7 @@
             font-size: 14px;
             font-family: Lato-Regular;
             color: #141428;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
         }
 
         .content-name {
@@ -768,52 +787,42 @@
             border: 1px solid black;
             padding: 20px;
         }
+
+        .btn-publish-sidepanel {
+            background-color: #a0d71e;
+            color: #fff;
+            margin-right: 32px;
+        }
+
+        .container-panel-buttons {
+            position: relative;
+            bottom: -60px;
+            left: 60px;
+        }
+
+        .icone-size a,
+        .icone-size a:hover {
+            color: #141428;
+            text-decoration: none;
+        }
+
+        #filetag {
+            display: none;
+        }
+
+        .input-edit-title {
+            background: none;
+        }
+        
     </style>
+
+    <link href="//cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <link href="//cdn.quilljs.com/1.3.6/quill.bubble.css" rel="stylesheet">
+
 </head>
 
 <body>
 
-    <div id="sidebar">
-        <nav id="sidebar-shortcuts" class="navbar fixed-right ype">
-            <div class="submenu-bar">
-                <div class="row">
-                    <div class="col-md-2 icone-size">
-                        <a href="#" onclick="newsAdmin.sidebar.editSidePanel()">
-                            <img src="/SitePages/src/Icones/icone-editar-preto.png">
-                            Editar
-                        </a>
-                    </div>
-
-                    <div class="col-md-2 icone-size">
-                        <a href="#" onclick="newsAdmin.sidebar.editSidePanel()">
-                            <img src="/SitePages/src/Icones/icone-link-preto-1.png">
-                            Link
-                        </a>
-                    </div>
-
-
-                    <div class="col-md-2 icone-size">
-                        <a href="#" onclick="newsAdmin.sidebar.editSidePanel()">
-                            <img src="/SitePages/src/Icones/icone-duplicar-preto.png">
-                            Duplicar
-                        </a>
-                    </div>
-
-                    <div class="col-md-2 icone-size">
-                        <a href="#" onclick="newsAdmin.sidebar.closeSidePanel()">
-                            <img src="/SitePages/src/Icones/icone-fechar-preto.png">
-                            Fechar
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="content">
-
-            </div>
-        </nav>
-    </div>
-    <!-- SitePages/src/ -->
     <div id="firstPage">
         <div class="news-page-header">
             <p>
@@ -824,8 +833,8 @@
             </p>
         </div>
 
-        <div id="tablesNews" class="wrap-tables container-fluid">
-            <button onclick="newsAdmin.api.createNews()" class="btn btn-default">Criar notícia</button>
+        <div id="tablesNews" class="wrap-tables container-fluid" style="display: block;">
+
             <!-- NAVIGATION -->
             <ul class="nav-news-list nav-justified" role="tablist">
                 <li role="presentation" class="active">
@@ -882,43 +891,49 @@
             </div>
         </div>
 
-        <div id="createNews" class="container-fluid" style="display: none;">
+        <div id="createNews" style="display: none;">
             <div class="create-panel">
-                <div class="create-panel__container">
-                    <img class="create-panel__banner" src="/SitePages/src/Images/img_placeholder@3x.png"
+                <div id="openImageUrl" class="create-panel__container">
+                    <img id="preview" class="create-panel__banner" src="/SitePages/src/Images/img_placeholder@3x.png"
                         style="width:100%;">
 
                     <div class="create-panel__header">
-                        <div class="container-header">
-                            <a href="#" class="btn-header">
+                        <div class="container-header panel-content">
+                            <a href="#" class="btn-header panel-content">
                                 <img src="/SitePages/src/Icones/icone-salvar-cinza.png">
                                 Salvar
                             </a>
-                            <a href="#" class="btn-header" onclick="newsAdmin.helpers.showTablesPage()">
+                            <a href="#" class="btn-header panel-content" onclick="newsAdmin.helpers.showTablesPage()">
                                 <img src="/SitePages/src/Icones/icone-fechar-preto.png">
                                 Cancelar
                             </a>
-                            <a href="#" class="btn-publish" onclick="newsAdmin.api.publishNewNews()">
+                            <a href="#" class="btn-publish panel-content"
+                                onclick="newsAdmin.sidebar.publishSidePanel()">
                                 Publicar
                             </a>
 
                         </div>
                     </div>
                     <div class="create-panel__name">
-                        <p class="news-name">Nome da notícia</p>
+                        <p class="news-name panel-content" onclick="newsAdmin.helpers.transformToInput(this)">Nome da
+                            notícia</p>
                     </div>
                 </div>
 
                 <div class="create-panel-options">
                     <div class="create-panel-options__line">
                         <a class="create-panel-options__line__button" href="#"
-                            onclick="newsAdmin.sidebar.openSidebar()">
+                            onclick="newsAdmin.sidebar.publishSidePanel()">
                             <img src="/SitePages/src/Icones/icone-novo-branco.png">
                         </a>
                     </div>
                 </div>
             </div>
         </div>
+
+        <input type="file" id="filetag">
+
+
     </div>
 
 
@@ -946,31 +961,56 @@
         </div>
     </div>
 
+    <div id="sidebar">
+        <nav id="sidebar-shortcuts" class="navbar fixed-right ype">
+            <div class="submenu-bar">
+
+                <div class="col-md-2 icone-size">
+                    <a href="#" onclick="newsAdmin.sidebar.editSidePanel()">
+                        <img src="/SitePages/src/Icones/icone-editar-preto.png">
+                        Editar
+                    </a>
+                </div>
+
+                <div class="col-md-2 icone-size">
+                    <a href="#">
+                        <img src="/SitePages/src/Icones/icone-link-preto-1.png">
+                        Link
+                    </a>
+                </div>
+
+
+                <div class="col-md-2 icone-size">
+                    <a href="#">
+                        <img src="/SitePages/src/Icones/icone-duplicar-preto.png">
+                        Duplicar
+                    </a>
+                </div>
+
+                <div class="col-md-2 icone-size">
+                    <a href="#" onclick="newsAdmin.sidebar.closeSidePanel()">
+                        <img src="/SitePages/src/Icones/icone-fechar-preto.png">
+                        Fechar
+                    </a>
+                </div>
+            </div>
+            <div class="content"></div>
+        </nav>
+    </div>
+
 
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+    <script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
+    <script src="//cdn.quilljs.com/1.3.6/quill.min.js"></script>
+
+
     <script>
         $(document).ready(function () {
             newsAdmin.helpers.refreshTables();
-
-            $("#view").click(function () {
-                newsAdmin.sidebar.viewSidePanel();
-            });
-
-            $("#public").click(function () {
-                newsAdmin.sidebar.publicSidePanel();
-            });
-
-            // $("#e_dit").click(function () {
-            //     newsAdmin.sidebar.editSidePanel();
-            // });
-
-            // $("#close").click(function () {
-            //     newsAdmin.sidebar.closeSidePanel();
-            // });
-
+            newsAdmin.helpers.uploadImage();
         });
 
         var newsAdmin = {
@@ -1022,6 +1062,7 @@
                             $(table + ' tbody').append(tbodyHtml);
                         },
                         error: function (e) {
+                            // alert('Não foi possível recuperar as notícias. Tente mais tarde.')
                             console.log(e);
                         }
                     });
@@ -1068,41 +1109,76 @@
                  * É necessário passar um json como parâmetro
                  */
                 createNews: function () {
-                    var objmock =
-                        '{   "Id": "0",   "Titulo": "Nova notíca",   "Status": "Publicado",   "CriadoPor": "Rafael Neves",   "ModificadoPor": "Rafael Neves",   "UltimaModificacao": "2020-01-07T14:54:24",   "Grupo": "Grupo",   "Publicacao": "2020-01-07T02:00:00Z",   "Empresa": "Ype",   "Unidade": "Amparo",   "NoticiaNova": true }';
-                    $.ajax({
-                        url: '/Servicos/YPE.WebService.asmx/postNoticia?noticia=' + objmock,
-                        cache: false,
-                        type: 'GET',
-                        success: function (data) {
-                            newsAdmin.helpers.refreshTables();
-                        },
-                        error: function (e) {
-                            console.log(e);
-                        }
-                    });
+                    var titleNews = $("#newsName").val();
+                    var companyNews = $("#selectCompany").val();
+                    var groupNews = $("#selectGroup").val();
+                    var unitNews = $("#selectUnit").val();
+
+                    if (titleNews && companyNews && groupNews && unitNews) {
+                        var newsData = {
+                            Id: "",
+                            Titulo: titleNews,
+                            Status: "Publicado",
+                            CriadoPor: "",
+                            ModificadoPor: "",
+                            UltimaModificacao: "2020-01-09T17:23:25",
+                            Grupo: groupNews,
+                            Publicacao: "2020-01-09T17:23:25",
+                            Empresa: companyNews,
+                            Unidade: unitNews,
+                            NoticiaNova: true
+                        };
+
+                        $.ajax({
+                            url: '/Servicos/YPE.WebService.asmx/postNoticia?noticia=' +
+                                JSON.stringify(newsData),
+                            cache: false,
+                            type: 'GET',
+                            success: function (data) {
+                                newsAdmin.sidebar.publishSucessSidePanel();
+                                newsAdmin.helpers.refreshTables();
+                            },
+                            error: function (e) {
+                                console.log(e);
+                            }
+                        });
+                    } else {
+                        alert('Existem campos não preenchidos.')
+                    }
+
                 },
 
-                updateNews: function (jsonNews) {
-                    $.ajax({
-                        url: '/Servicos/YPE.WebService.asmx/postNoticia?noticia=' + jsonNews,
-                        cache: false,
-                        type: 'GET',
-                        success: function (data) {
-                            newsAdmin.helpers.refreshTables();
-                        },
-                        error: function (e) {
-                            console.log(e);
-                        }
-                    });
-                },
-
-                pusblishArchivedNews: function () {
+                updateNews: function () {
                     var jsonNews = newsAdmin.variables.jsonNews;
+
+                    if (jsonNews) {
+                        var newTitle = $("#edit-title").val();
+                        jsonNews.Titulo = newTitle;
+
+                        $.ajax({
+                            url: '/Servicos/YPE.WebService.asmx/postNoticia?noticia=' + JSON.stringify(
+                                jsonNews),
+                            cache: false,
+                            type: 'GET',
+                            success: function (data) {
+                                newsAdmin.sidebar.closeSidePanel();
+                                newsAdmin.helpers.refreshTables();
+                            },
+                            error: function (e) {
+                                console.log(e);
+                            }
+                        });
+                    }
+                },
+
+                publishArchivedNews: function () {
+                    var jsonNews = newsAdmin.variables.jsonNews;
+
                     if (jsonNews) {
                         jsonNews.Status = 'Publicado';
                         jsonNews.NoticiaNova = 'true';
 
+                        console.log(jsonNews)
                         $.ajax({
                             url: '/Servicos/YPE.WebService.asmx/postNoticia?noticia=' + JSON.stringify(
                                 jsonNews),
@@ -1120,21 +1196,7 @@
                 }
             },
 
-            publish: {
-                /** Publica uma nova notícia e limpa os campos na tela de criação */
-                publishNewNews: function () {
-                    newsAdmin.api.createNews();
-
-                    /* Campos */
-                    $(".news-name").val(name);
-                }
-            },
-
             sidebar: {
-                openSidebar: function () {
-                    alert('open sidebar');
-                },
-
                 editSidePanel: function () {
                     console.log("editSidePanel")
                     var containerMenu = document.querySelector('.container-submenu');
@@ -1144,16 +1206,17 @@
                     elementT.classList.add("side-panel-block");
 
                     var elementP = document.querySelector('#firstPage');
-                    elementP.classList.add("blue");
+                    elementP.classList.add("blur");
 
                     var status = '<div class="details-title"> Editar </div> <div class="status-title">' +
                         newsAdmin.variables.jsonNews.Titulo + ' </div>' + '<form class="form-container">' +
                         '<div class="input__container">' +
-                        '<input class="input" placeholder="Editar nome da notícia" type="text" id="tags" name="tags">' +
+                        '<input class="input" placeholder="Editar nome da notícia" type="text" id="edit-title" name="edit-title">' +
                         '</div>' +
                         '<div class="content-title">Status da notícia</div>' +
                         '<div class="status-public">Publicada</div>' +
-                        '<div class="status-date">' + newsAdmin.helpers.formatDate(newsAdmin.variables.jsonNews.Publicacao)  + '</div>' +
+                        '<div class="status-date">' + newsAdmin.helpers.formatDate(newsAdmin.variables.jsonNews
+                            .Publicacao) + '</div>' +
                         '<div class="status-expi">Expira em</div>' +
                         '<div class="status-date">' + newsAdmin.variables.expiredPublic + '</div>';
 
@@ -1164,8 +1227,7 @@
                         .variables.createDate + '</div>' +
                         '<div class="content-subtitle">Modificado por</div>' + '<div class="content-name">' +
                         newsAdmin.variables.jsonNews.ModificadoPor + '</div>' + '<div class="status-date">' +
-                        newsAdmin
-                        .variables.jsonNews.UltimaModificacao + '</div>';
+                        newsAdmin.helpers.formatDate(newsAdmin.variables.jsonNews.UltimaModificacao) + '</div>';
 
                     var aud = '<div class="content-title">Audiência </div>' +
                         '<div class="content-subtitle"> Nome da empresa </div>' +
@@ -1173,9 +1235,13 @@
                         '<div class="content-subtitle">Nome da unidade</div>' + '<div class="content-name">' +
                         newsAdmin.variables.jsonNews.Unidade + '</div>' +
                         '<div class="content-subtitle" >Nome do grupo</div>' +
-                        '<div class="content-name">Equipe: ' + newsAdmin.variables.jsonNews.Grupo + '</div>'
+                        '<div class="content-name">Equipe: ' + newsAdmin.variables.jsonNews.Grupo + '</div>' +
+                        '<div class="container-panel-buttons"><a class="btn btn-publish-sidepanel" onclick="newsAdmin.api.updateNews()">Publicar</a><a class="btn" onclick="newsAdmin.sidebar.closeSidePanel()">Cancelar</a></div>';
+
 
                     document.querySelector('.content').innerHTML = status + info + aud;
+
+
                 },
 
                 viewSidePanel: function () {
@@ -1186,13 +1252,14 @@
                     elementT.classList.add("side-panel-block");
 
                     var elementP = document.querySelector('#firstPage');
-                    elementP.classList.add("blue");
+                    elementP.classList.add("blur");
 
                     var status = '<div class="details-title"> Detalhes </div> <div class="status-title">' +
                         newsAdmin.variables.jsonNews.Titulo + '</div>' +
                         '<div class="content-title">' + newsAdmin.variables.jsonNews.Status + '</div>' +
                         '<div class="status-public">Publicada</div>' +
-                        '<div class="status-date">' + newsAdmin.helpers.formatDate(newsAdmin.variables.jsonNews.Publicacao) + '</div>' +
+                        '<div class="status-date">' + newsAdmin.helpers.formatDate(newsAdmin.variables.jsonNews
+                            .Publicacao) + '</div>' +
                         '<div class="status-expi">Expira em</div>' +
                         '<div class="status-date">' + newsAdmin.variables.expiredPublic + '</div>';
 
@@ -1203,7 +1270,7 @@
                         .variables.createDate + '</div>' +
                         '<div class="content-subtitle">Modificado por</div>' + '<div class="content-name">' +
                         newsAdmin.variables.jsonNews.ModificadoPor + '</div>' + '<div class="status-date">' +
-                        newsAdmin.variables.jsonNews.UltimaModificacao + '</div>';
+                        newsAdmin.helpers.formatDate(newsAdmin.variables.jsonNews.UltimaModificacao) + '</div>';
 
                     var aud = '<div class="content-title">Audiência </div>' +
                         '<div class="content-subtitle"> Nome da empresa </div>' +
@@ -1216,20 +1283,32 @@
                     document.querySelector('.content').innerHTML = status + info + aud;
                 },
 
-                publicSidePanel: function () {
-                    console.log('publicSidePanel')
+                publishSidePanel: function () {
+                    console.log('publishSidePanel')
                     var element = document.querySelector('#sidebar-shortcuts');
                     element.classList.add("side-panel-block");
                     var element = document.querySelector('.submenu-bar');
                     element.classList.add("container-submenu");
                     var element = document.querySelector('#firstPage');
-                    element.classList.add("blue");
+                    element.classList.add("blur");
 
                     var status =
-                        '<div class="details-title"> Publicar notícia </div> <div class="status-title"> Nome da Notícia </div>' +
-                        '<div class="content-title">Agende sua notícia</div>';
-                    var info = '<div class="content-subtitle">Data de publicação</div>';
-                    var date = '<form class="form-container">' + '<div class="input__container">' +
+                        '<div class="details-title"> Publicar notícia </div>';
+
+                    var date = '<form class="form-container">' +
+                        '<div class="content-subtitle">Nome da notícia</div>' +
+                        '<div class="input__container">' +
+                        '<input class="input" placeholder="Digite o nome da notícia" type="text" id="newsName" name="newsName">' +
+                        '</div>' +
+
+                        '<div class="content-subtitle">Descrição da notícia</div>' +
+                        '<div class="input__container">' +
+                        '<input class="input" placeholder="Digite a descrição da notícia" type="text" id="newsDesc" name="newsDesc">' +
+                        '</div>' +
+
+                        '<div class="content-title">Agende sua notícia</div>' +
+                        '<div class="content-subtitle">Data de publicação</div>' +
+                        '<div class="input__container">' +
                         '<input class="input" placeholder="Digite seu nome" type="date" data-date-inline-picker="true" id="date" name="date">' +
                         '</div>'
                     var status_1 =
@@ -1242,25 +1321,24 @@
                     var info_2 = '<div class="content-subtitle">Empresa</div>';
                     var date_2 = '<form class="form-container">' + '<div class="input__container">' +
                         '<span class="chevron"></span>' +
-                        '<select class="select-css" name="secondQuestion" id="secondQuestion">' +
+                        '<select class="select-css" name="selectCompany" id="selectCompany">' +
                         '<option value="">Escolha a empresa</option>' + '<option value="yes">Sim</option>' +
                         '</select>' + '</div>'
                     var info_3 = '<div class="content-subtitle">Unidade</div>';
                     var date_3 = '<form class="form-container">' + '<div class="input__container">' +
                         '<span class="chevron"></span>' +
-                        '<select class="select-css" name="secondQuestion" id="secondQuestion">' +
+                        '<select class="select-css" name="selectUnit" id="selectUnit">' +
                         '<option value="">Escolha a a unidade</option>' + '<option value="yes">Sim</option>' +
                         '</select>' + '</div>'
                     var info_4 = '<div class="content-subtitle">Grupo</div>';
                     var date_4 = '<form class="form-container">' + '<div class="input__container">' +
                         '<span class="chevron"></span>' +
-                        '<select class="select-css" name="secondQuestion" id="secondQuestion">' +
+                        '<select class="select-css" name="selectGroup" id="selectGroup">' +
                         '<option value="">Escolha o grupo</option>' + '<option value="yes">Sim</option>' +
                         '</select>' + '</div>'
                     var button =
-                        '<i onclick="newsAdmin.sidepanel.publicSucessSidePanel()" id="public-sucess" class="button button-public"> PUBLICAR </i>' +
-                        '<i  onclick="newsAdmin.sidebar.closeSidePanel()" id="close" class="button button-close">CANCELAR</i>'
-                    document.querySelector('.content').innerHTML = status + info + date + status_1 + info_1 +
+                        '<div class="container-panel-buttons"><a class="btn btn-publish-sidepanel" onclick="newsAdmin.api.createNews()">Publicar</a><a class="btn" onclick="newsAdmin.sidebar.closeSidePanel()">Cancelar</a></div>';
+                    document.querySelector('.content').innerHTML = status + date + status_1 + info_1 +
                         date_1 + status_2 + info_2 + date_2 + info_3 + date_3 + info_4 + date_4 + button;
                 },
 
@@ -1268,27 +1346,33 @@
                     var element = document.querySelector('#sidebar-shortcuts');
                     element.classList.remove("side-panel-block");
                     var element1 = document.querySelector('#firstPage');
-                    element1.classList.remove("blue");
+                    element1.classList.remove("blur");
 
                     newsAdmin.variables.jsonNews = "";
+
+                    newsAdmin.helpers.clearFields();
                 },
 
-                publicSucessSidePanel: function () {
+                publishSucessSidePanel: function () {
+                    var newsData = newsAdmin.variables.jsonNews;
+
                     var element = document.querySelector('#sidebar-shortcuts');
                     element.classList.add("side-panel-block");
                     var element1 = document.querySelector('.submenu-bar');
                     element1.classList.add("container-submenu");
                     var element2 = document.querySelector('#firstPage');
-                    element2.classList.add("blue");
+                    element2.classList.add("blur");
                     var status =
-                        '<div class="details-title"> Notícia publicada </div> <div class="status-title"> Nome da Notícia </div>' +
-                        '<div class="content-title-date">Data de publicação: 13/11/2019</div>';
+                        '<div class="details-title"> Notícia publicada! </div> <div class="status-title"> ' +
+                        newsData.Titulo + ' </div>' +
+                        '<div class="content-title-date">Data de publicação: ' + newsData.Publicacao + '</div>';
                     var info = '<div class="content-subtitle">Endereço da notícia</div>';
                     var link = '<div class="copy-link">link</div>';
                     var button =
-                        '<button onclick="closeSidePanel()" id="close" class="button button-close">FECHAR</button>'
+                        '<br><button onclick="newsAdmin.sidebar.closeSidePanel()" id="close" class="btn">Fechar</button>'
                     document.querySelector('.content').innerHTML = status + info + link + button;
                 }
+
 
 
             },
@@ -1309,9 +1393,9 @@
                         '<img class="news__more dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" src="/SitePages/src/Icones/icone-mais-azul.png">' +
                         '<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">' +
                         (status !== 'Arquivado' ? '<li><a href="#">Ir para notícia</a></li>' :
-                            '<li><a onclick="newsAdmin.api.pusblishArchivedNews()" href="#">Publicar</a></li>'
+                            '<li><a onclick="newsAdmin.api.publishArchivedNews()" href="#">Publicar</a></li>'
                         ) +
-                        '<li><a href="#">Editar</a></li>' +
+                        '<li><a href="#" onclick="newsAdmin.sidebar.editSidePanel()">Editar</a></li>' +
                         (status !== 'Arquivado' ?
                             '<li><a class="archiveCurrentNews" href="#" data-toggle="modal" data-target="#archivedModal">Arquivar</a></li>' :
                             '<li><a class="deleteCurrentNews" href="#" onclick="newsAdmin.api.deleteNews()">Deletar</a></li>'
@@ -1359,6 +1443,55 @@
                 showTablesPage: function () {
                     $("#createNews").hide();
                     $("#tablesNews, .news-page-header").show();
+                },
+
+                clearFields: function () {
+                    $('.form-container')[0].reset();
+                },
+
+                uploadImage: function () {
+                    $('#openImageUrl').click(function (e) {
+                        if ($(e.target).is('.panel-content')) {
+                            e.preventDefault();
+                            return;
+                        }
+                        $('#filetag').trigger('click');
+                    });
+
+                    var fileTag = document.getElementById("filetag");
+                    var preview = document.getElementById("preview");
+
+                    fileTag.addEventListener("change", function () {
+                        newsAdmin.helpers.changeImage(this);
+                    });
+
+                },
+
+                changeImage: function (input) {
+                    var reader;
+
+                    if (input.files && input.files[0]) {
+                        reader = new FileReader();
+
+                        reader.onload = function (e) {
+                            preview.setAttribute('src', e.target.result);
+                        }
+
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                },
+
+                transformToInput: function (obj) {
+                    console.log(obj)
+                    $(".create-panel__name").html(
+                        "<input onblur='newsAdmin.helpers.handleBlurInput(this)' id='inputNewsTitle' name='inputNewsTitle' type='text' class='input-edit-title panel-content' value='" +
+                        obj.innerHTML + "' />");
+                },
+
+                handleBlurInput: function (input) {
+                    $(".create-panel__name").html(
+                        "<p class='news-name panel-content' onclick='newsAdmin.helpers.transformToInput(this)'>" +
+                        $(input).val() + "</p>");
                 }
             }
         }
