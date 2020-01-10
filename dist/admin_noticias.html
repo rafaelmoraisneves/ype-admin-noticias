@@ -813,7 +813,6 @@
         .input-edit-title {
             background: none;
         }
-        
     </style>
 
     <link href="//cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
@@ -1017,6 +1016,7 @@
             variables: {
                 jsonNews: "", // JSON com os dados da notícia selecionada
                 idNews: "", // JSON com o ID da notícia selecionada
+                nameNews: "Nome da notícia",
 
                 // sidebar
                 expiredPublic: "31/07/1999",
@@ -1116,7 +1116,7 @@
 
                     if (titleNews && companyNews && groupNews && unitNews) {
                         var newsData = {
-                            Id: "",
+                            Id: "0",
                             Titulo: titleNews,
                             Status: "Publicado",
                             CriadoPor: "",
@@ -1192,8 +1192,24 @@
                             }
                         });
                     }
+                },
 
+                getEmpresasUnidadesCargos: function () {
+                    $.ajax({
+                        url: '/Servicos/YPE.WebService.asmx/getEmpresasUnidadesCargos',
+                        cache: false,
+                        type: 'GET',
+                        success: function (data) {
+                            var newsData = JSON.parse($(data).find('string')[0].textContent);
+                            newsAdmin.helpers.buildDropdownOptions(newsData);
+                        },
+                        error: function (e) {
+                            console.log(e);
+                        }
+                    });
                 }
+
+
             },
 
             sidebar: {
@@ -1284,7 +1300,8 @@
                 },
 
                 publishSidePanel: function () {
-                    console.log('publishSidePanel')
+                    newsAdmin.api.getEmpresasUnidadesCargos();
+
                     var element = document.querySelector('#sidebar-shortcuts');
                     element.classList.add("side-panel-block");
                     var element = document.querySelector('.submenu-bar');
@@ -1293,13 +1310,13 @@
                     element.classList.add("blur");
 
                     var status =
-                        '<div class="details-title"> Publicar notícia </div>';
+                        '<div class="details-title"> Publicar notícia </div> <div class="status-title"> ' +
+                        newsAdmin.variables.nameNews + ' </div>';
 
                     var date = '<form class="form-container">' +
-                        '<div class="content-subtitle">Nome da notícia</div>' +
-                        '<div class="input__container">' +
-                        '<input class="input" placeholder="Digite o nome da notícia" type="text" id="newsName" name="newsName">' +
-                        '</div>' +
+
+                        '<input class="input" type="hidden" id="newsName" name="newsName" value="' + newsAdmin
+                        .variables.nameNews + '">' +
 
                         '<div class="content-subtitle">Descrição da notícia</div>' +
                         '<div class="input__container">' +
@@ -1322,19 +1339,20 @@
                     var date_2 = '<form class="form-container">' + '<div class="input__container">' +
                         '<span class="chevron"></span>' +
                         '<select class="select-css" name="selectCompany" id="selectCompany">' +
-                        '<option value="">Escolha a empresa</option>' + '<option value="yes">Sim</option>' +
+                        '<option value="">Escolha a empresa</option>' +
+
                         '</select>' + '</div>'
                     var info_3 = '<div class="content-subtitle">Unidade</div>';
                     var date_3 = '<form class="form-container">' + '<div class="input__container">' +
                         '<span class="chevron"></span>' +
                         '<select class="select-css" name="selectUnit" id="selectUnit">' +
-                        '<option value="">Escolha a a unidade</option>' + '<option value="yes">Sim</option>' +
+                        '<option value="">Escolha a a unidade</option>' +
                         '</select>' + '</div>'
                     var info_4 = '<div class="content-subtitle">Grupo</div>';
                     var date_4 = '<form class="form-container">' + '<div class="input__container">' +
                         '<span class="chevron"></span>' +
                         '<select class="select-css" name="selectGroup" id="selectGroup">' +
-                        '<option value="">Escolha o grupo</option>' + '<option value="yes">Sim</option>' +
+                        '<option value="">Escolha o grupo</option>' +
                         '</select>' + '</div>'
                     var button =
                         '<div class="container-panel-buttons"><a class="btn btn-publish-sidepanel" onclick="newsAdmin.api.createNews()">Publicar</a><a class="btn" onclick="newsAdmin.sidebar.closeSidePanel()">Cancelar</a></div>';
@@ -1364,17 +1382,16 @@
                     element2.classList.add("blur");
                     var status =
                         '<div class="details-title"> Notícia publicada! </div> <div class="status-title"> ' +
-                        newsData.Titulo + ' </div>' +
+                        newsAdmin.variables.nameNews + ' </div>' +
                         '<div class="content-title-date">Data de publicação: ' + newsData.Publicacao + '</div>';
                     var info = '<div class="content-subtitle">Endereço da notícia</div>';
                     var link = '<div class="copy-link">link</div>';
                     var button =
                         '<br><button onclick="newsAdmin.sidebar.closeSidePanel()" id="close" class="btn">Fechar</button>'
                     document.querySelector('.content').innerHTML = status + info + link + button;
+
+                    $(".news-name").text('Nome da notícia');
                 }
-
-
-
             },
 
             helpers: {
@@ -1491,8 +1508,56 @@
                 handleBlurInput: function (input) {
                     $(".create-panel__name").html(
                         "<p class='news-name panel-content' onclick='newsAdmin.helpers.transformToInput(this)'>" +
-                        $(input).val() + "</p>");
+                        $(input).val() + "</p>"
+                    );
+
+                    newsAdmin.variables.nameNews = $(input).val();
+                },
+
+
+                buildDropdownOptions: function (data) {
+                    // var data = {
+                    //     "Empresas":[
+                    //         {"empresa":"Ypê"},
+                    //         {"empresa":"Tix"}
+                    //     ],
+                    //     "Unidades":[
+                    //         {"unidade":"Amparo","Quantidade":0},
+                    //         {"unidade":"Salto","Quantidade":0},
+                    //         {"unidade":"Goiânia","Quantidade":0},
+                    //         {"unidade":"Anápolis","Quantidade":0},
+                    //         {"unidade":"Simões Filho","Quantidade":0},
+                    //         {"unidade":"Comercial","Quantidade":0}
+                    //     ],
+                    //     "Cargos":[
+                    //         {"cargo":"Equipe","Quantidade":0},
+                    //         {"cargo":"Especialista","Quantidade":0},
+                    //         {"cargo":"Supervisor","Quantidade":0},
+                    //         {"cargo":"Coordenador","Quantidade":0},
+                    //         {"cargo":"Gerente","Quantidade":0},
+                    //         {"cargo":"Diretoria","Quantidade":0}
+                    //     ]
+                    // }
+
+                    data.Empresas.map(function (e) {
+                        $("#selectCompany").append('<option value="' + e.empresa + '">' + e.empresa +
+                            '</option>');
+                    });
+
+                    data.Unidades.map(function (u) {
+                        $("#selectUnit").append('<option value="' + u.unidade + '">' + u.unidade +
+                            '</option>');
+                    });
+
+                    data.Cargos.map(function (c) {
+                        $("#selectGroup").append('<option value="' + c.cargo + '">' + c.cargo +
+                            '</option>');
+                    });
+
+
                 }
+
+
             }
         }
     </script>
