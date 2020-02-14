@@ -1,13 +1,20 @@
+<%@ Page Language="C#" %>
+<%@ Register tagprefix="SharePoint" namespace="Microsoft.SharePoint.WebControls" assembly="Microsoft.SharePoint, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c" %>
+
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+<meta name="WebPartPageExpansion" content="full" />
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Notícias</title>
-    <!-- <link rel="stylesheet" href="../src/css/admin_noticias.css"> -->
+    <title>Notícias Admin</title>
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <!-- <link rel="stylesheet" href="/SitePages/src/css/admin_noticias.css"> -->
+
+    <SharePoint:ScriptLink Name="MicrosoftAjax.js" runat="server" Defer="False" Localizable="false"/>
+    <SharePoint:ScriptLink Name="SP.core.js" runat="server" Defer="False" Localizable="false"/>
+    <SharePoint:ScriptLink Name="SP.js" runat="server" Defer="True" Localizable="false"/>
 
 
     <style>
@@ -193,6 +200,9 @@
             cursor: pointer;
         }
 
+        .create-panel__container {
+            position: relative;
+        }
 
         /* Top left text */
         .create-panel__buttons {
@@ -268,12 +278,13 @@
             width: 100%;
         }
 
-        .create-panel-options {}
+        .create-panel-options {
+            padding: 40px 80px;
+        }
 
         .create-panel-options__line {
             background-color: #0070b8;
             height: 2px;
-            width: 87%;
             display: block;
             margin: 0 auto;
             text-align: center;
@@ -288,6 +299,7 @@
             border-radius: 20px;
             height: 32px;
             width: 32px;
+            left: 50%;
         }
 
         .create-panel-options__line__button img {
@@ -300,25 +312,6 @@
         #wrap-table-news-2 {
             height: 100%;
         }
-
-
-        /* sidebar */
-
-        /* body {
-            padding-top: 90px;
-        } */
-
-        /* @media (min-width: 768px) {
-            body {
-                padding-top: 0;
-            }
-        } */
-
-        /* @media (min-width: 768px) {
-            body {
-                margin-right: 232px;
-            }
-        } */
 
         .blur {
             filter: blur(8px);
@@ -813,6 +806,15 @@
         .input-edit-title {
             background: none;
         }
+
+        .disable-button {
+            pointer-events: none;
+            cursor: default;
+        }
+
+        #createNews {
+            height: 1000px;
+        }
     </style>
 
     <link href="//cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
@@ -821,6 +823,12 @@
 </head>
 
 <body>
+
+    <SharePoint:SharePointForm runat="server" __designer:Preview="&lt;table cellpadding=4 cellspacing=0 style=&quot;font:messagebox;color:buttontext;background-color:buttonface;border: solid 1px;border-top-color:buttonhighlight;border-left-color:buttonhighlight;border-bottom-color:buttonshadow;border-right-color:buttonshadow&quot;&gt;
+              &lt;tr&gt;&lt;td nowrap&gt;&lt;span style=&quot;font-weight:bold&quot;&gt;SharePointForm&lt;/span&gt; - Unnamed4&lt;/td&gt;&lt;/tr&gt;
+              &lt;tr&gt;&lt;td&gt;&lt;/td&gt;&lt;/tr&gt;
+            &lt;/table&gt;" __designer:Values="&lt;P N=&#39;Method&#39; T=&#39;post&#39; /&gt;&lt;P N=&#39;Name&#39; ID=&#39;1&#39; T=&#39;ctl03&#39; /&gt;&lt;P N=&#39;InnerHtml&#39; ID=&#39;2&#39; T=&#39;&amp;#xD;&amp;#xA;    &#39; /&gt;&lt;P N=&#39;InnerText&#39; R=&#39;2&#39; /&gt;&lt;P N=&#39;TagName&#39; T=&#39;form&#39; /&gt;&lt;P N=&#39;ID&#39; R=&#39;1&#39; /&gt;&lt;P N=&#39;Page&#39; ID=&#39;3&#39; /&gt;&lt;P N=&#39;TemplateControl&#39; R=&#39;3&#39; /&gt;&lt;P N=&#39;AppRelativeTemplateSourceDirectory&#39; R=&#39;-1&#39; /&gt;">
+    </SharePoint:SharePointForm>
 
     <div id="firstPage">
         <div class="news-page-header">
@@ -863,10 +871,7 @@
                                 <th>Grupo</th>
                             </tr>
                         </thead>
-                        <tbody>
-
-
-                        </tbody>
+                        <tbody></tbody>
                     </table>
                 </div>
 
@@ -895,6 +900,7 @@
                 <div id="openImageUrl" class="create-panel__container">
                     <img id="preview" class="create-panel__banner" src="/SitePages/src/Images/img_placeholder@3x.png"
                         style="width:100%;">
+                    
 
                     <div class="create-panel__header">
                         <div class="container-header panel-content">
@@ -914,15 +920,15 @@
                         </div>
                     </div>
                     <div class="create-panel__name">
-                        <p class="news-name panel-content" onclick="newsAdmin.helpers.transformToInput(this)">Nome da
-                            notícia</p>
+                        <p class="news-name panel-content" 
+                        onclick="newsAdmin.helpers.transformToInput(this)">Nome da notícia</p>
                     </div>
                 </div>
 
                 <div class="create-panel-options">
                     <div class="create-panel-options__line">
                         <a class="create-panel-options__line__button" href="#"
-                            onclick="newsAdmin.sidebar.publishSidePanel()">
+                            onclick="newsAdmin.helpers.appendNewField()">
                             <img src="/SitePages/src/Icones/icone-novo-branco.png">
                         </a>
                     </div>
@@ -931,11 +937,7 @@
         </div>
 
         <input type="file" id="filetag">
-
-
     </div>
-
-
 
     <!-- ARCHIVED MODAL -->
     <div class="modal fade archived-modal" id="archivedModal" tabindex="-1" role="dialog"
@@ -1010,17 +1012,86 @@
         $(document).ready(function () {
             newsAdmin.helpers.refreshTables();
             newsAdmin.helpers.uploadImage();
+
+            fileInput = $("#filetag");  
+            SP.SOD.executeFunc('sp.js', 'SP.ClientContext', registerClick);  
+
         });
+
+        var fileInput;  
+       
+        function registerClick() {  
+            //Register File Upload Click Event   
+            $("#filetag").change(readFile);  
+        }  
+        var arrayBuffer;  
+        
+        function readFile() {  
+            
+            //Get File Input Control and read th file name  
+            var element = document.getElementById("filetag");  
+            var file = element.files[0];  
+            var parts = element.value.split("\\");  
+            var fileName = parts[parts.length - 1];  
+            
+            //Read File contents using file reader  
+            var reader = new FileReader();  
+            reader.onload = function (e) {  
+                uploadFile(e.target.result, fileName);  
+            }  
+            reader.onerror = function (e) {  
+                alert(e.target.error);  
+            }  
+            reader.readAsArrayBuffer(file);  
+        }  
+        var attachmentFiles;  
+        
+        function uploadFile(arrayBuffer, fileName) {  
+            //Get Client Context,Web and List object.  
+            var clientContext = new SP.ClientContext();  
+            var oWeb = clientContext.get_web();  
+            var oList = oWeb.get_lists().getByTitle('Imagens de Noticias');  
+            
+            //Convert the file contents into base64 data  
+        var bytes = new Uint8Array(arrayBuffer);  
+            var i, length, out = '';  
+            for (i = 0, length = bytes.length; i < length; i += 1) {  
+                out += String.fromCharCode(bytes[i]);  
+            }  
+            var base64 = btoa(out);  
+            //Create FileCreationInformation object using the read file data  
+            var createInfo = new SP.FileCreationInformation();  
+            createInfo.set_content(base64);  
+            createInfo.set_url(fileName);  
+            
+            //Add the file to the library  
+            var uploadedDocument = oList.get_rootFolder().get_files().add(createInfo)  
+            //Load client context and execcute the batch  
+            clientContext.load(uploadedDocument);  
+            clientContext.executeQueryAsync(QuerySuccess, QueryFailure);  
+        }  
+        
+        function QuerySuccess() {  
+            console.log('File Uploaded Successfully.');  
+        }  
+        
+        function QueryFailure(sender, args) {  
+            console.log('Request failed with error message - ' + args.get_message() + ' . Stack Trace - ' + args.get_stackTrace());
+            alert("Request failed with error message - " + args.get_message() + " . Stack Trace - " + args.get_stackTrace());
+        }
 
         var newsAdmin = {
             variables: {
                 jsonNews: "", // JSON com os dados da notícia selecionada
                 idNews: "", // JSON com o ID da notícia selecionada
                 nameNews: "Nome da notícia",
-
-                // sidebar
-                expiredPublic: "31/07/1999",
-                createDate: "12/12/1999"
+                descNews: "",
+                publishDate: "",
+                expiredPublic: "",
+                // createDate: "12/12/1999",
+                imgBase64: "",
+                folderName: "Imagens de Noticias",
+                pageUrl: ""
             },
 
             api: {
@@ -1035,8 +1106,6 @@
                         async: false,
                         success: function (data) {
                             var newsData = JSON.parse($(data).find('string')[0].textContent);
-                            console.log(newsData);
-
                             var tbodyHtml = "";
                             newsData.map(function (news, index) {
 
@@ -1062,7 +1131,6 @@
                             $(table + ' tbody').append(tbodyHtml);
                         },
                         error: function (e) {
-                            // alert('Não foi possível recuperar as notícias. Tente mais tarde.')
                             console.log(e);
                         }
                     });
@@ -1076,7 +1144,6 @@
                             cache: false,
                             type: 'GET',
                             success: function (data) {
-                                console.log(data);
                                 newsAdmin.helpers.refreshTables();
                             },
                             error: function (e) {
@@ -1088,11 +1155,9 @@
 
                 /** Função responsável por arquivar uma notícia*/
                 archiveNews: function () {
-                    console.log("id: ", newsAdmin.variables.idNews)
                     if (newsAdmin.variables.idNews !== "") {
                         $.ajax({
-                            url: '/Servicos/YPE.WebService.asmx/getArquivarNoticia?idNoticia=' +
-                                newsAdmin.variables.idNews,
+                            url: '/Servicos/YPE.WebService.asmx/getArquivarNoticia?idNoticia=' + newsAdmin.variables.idNews + '&ModificadoPor=' +  _spPageContextInfo.userDisplayName,
                             cache: false,
                             type: 'GET',
                             success: function (data) {
@@ -1110,24 +1175,37 @@
                  */
                 createNews: function () {
                     var titleNews = $("#newsName").val();
+                    var descNews = $("#newsDesc").val();
                     var companyNews = $("#selectCompany").val();
                     var groupNews = $("#selectGroup").val();
                     var unitNews = $("#selectUnit").val();
+                    var publishDate = $("#date").val();
+                    var img = newsAdmin.variables.imgBase64;
+                    var fileName = newsAdmin.variables.fileName;
 
-                    if (titleNews && companyNews && groupNews && unitNews) {
+                    if (titleNews && descNews && companyNews && groupNews && unitNews && img && fileName) {
                         var newsData = {
-                            Id: "0",
+                            Id: "0", // 0 = criar nova notícia
                             Titulo: titleNews,
-                            Status: "Publicado",
-                            CriadoPor: "",
-                            ModificadoPor: "",
-                            UltimaModificacao: "2020-01-09T17:23:25",
+                            Descricao: descNews,
+                            Status: 'Publicado', 
+                            CriadoPor: _spPageContextInfo.userDisplayName,
+                            ModificadoPor: _spPageContextInfo.userDisplayName,
+                            UltimaModificacao: newsAdmin.helpers.formatDate2(publishDate),
                             Grupo: groupNews,
-                            Publicacao: "2020-01-09T17:23:25",
+                            Publicacao: newsAdmin.helpers.formatDate2(publishDate),
                             Empresa: companyNews,
                             Unidade: unitNews,
-                            NoticiaNova: true
+                            NoticiaNova: true,
+                            ImageURL: "/" + newsAdmin.variables.folderName + "/" + newsAdmin.variables.fileName
                         };
+
+                        console.log("/" + newsAdmin.variables.folderName + "/" + newsAdmin.variables.fileName);
+                        
+                        // newsAdmin.helpers.uploadFile();
+
+                        console.log(JSON.stringify(newsData));
+
 
                         $.ajax({
                             url: '/Servicos/YPE.WebService.asmx/postNoticia?noticia=' +
@@ -1135,13 +1213,15 @@
                             cache: false,
                             type: 'GET',
                             success: function (data) {
+                                console.log("---------->> SUCCESS: ", data)
                                 newsAdmin.sidebar.publishSucessSidePanel();
                                 newsAdmin.helpers.refreshTables();
                             },
                             error: function (e) {
-                                console.log(e);
+                                console.log('---------->> ERROR', e);
                             }
                         });
+                       
                     } else {
                         alert('Existem campos não preenchidos.')
                     }
@@ -1150,10 +1230,19 @@
 
                 updateNews: function () {
                     var jsonNews = newsAdmin.variables.jsonNews;
+                  
 
                     if (jsonNews) {
                         var newTitle = $("#edit-title").val();
+                        var newDesc = $("#edit-desc").val();
+
                         jsonNews.Titulo = newTitle;
+                        jsonNews.Descricao = newDesc;
+                        jsonNews.CriadoPor = _spPageContextInfo.userDisplayName;
+                        jsonNews.ModificadoPor = _spPageContextInfo.userDisplayName;
+
+
+                        console.log('jsonNews', jsonNews)
 
                         $.ajax({
                             url: '/Servicos/YPE.WebService.asmx/postNoticia?noticia=' + JSON.stringify(
@@ -1178,7 +1267,6 @@
                         jsonNews.Status = 'Publicado';
                         jsonNews.NoticiaNova = 'true';
 
-                        console.log(jsonNews)
                         $.ajax({
                             url: '/Servicos/YPE.WebService.asmx/postNoticia?noticia=' + JSON.stringify(
                                 jsonNews),
@@ -1208,13 +1296,11 @@
                         }
                     });
                 }
-
-
             },
 
             sidebar: {
                 editSidePanel: function () {
-                    console.log("editSidePanel")
+                    console.log(newsAdmin.variables.jsonNews)
                     var containerMenu = document.querySelector('.container-submenu');
                     if (containerMenu) containerMenu.classList.remove("container-submenu");
 
@@ -1225,10 +1311,17 @@
                     elementP.classList.add("blur");
 
                     var status = '<div class="details-title"> Editar </div> <div class="status-title">' +
-                        newsAdmin.variables.jsonNews.Titulo + ' </div>' + '<form class="form-container">' +
+                        newsAdmin.variables.jsonNews.Titulo + 
+                        ' </div>' + 
+                        '<form class="form-container">' +
                         '<div class="input__container">' +
-                        '<input class="input" placeholder="Editar nome da notícia" type="text" id="edit-title" name="edit-title">' +
+                        '<input class="input" placeholder="Editar nome da notícia" type="text" id="edit-title" name="edit-title" value="'+newsAdmin.variables.jsonNews.Titulo+'">' +
                         '</div>' +
+
+                        '<div class="input__container">' +
+                        '<textarea class="input form-control" placeholder="Editar descrição da notícia" type="text" id="edit-desc" name="edit-desc">' + newsAdmin.variables.jsonNews.Descricao  + '</textarea>' +
+                        '</div>' +
+
                         '<div class="content-title">Status da notícia</div>' +
                         '<div class="status-public">Publicada</div>' +
                         '<div class="status-date">' + newsAdmin.helpers.formatDate(newsAdmin.variables.jsonNews
@@ -1239,8 +1332,7 @@
                     var info = '<div class="content-title">Informações da notícia</div>' +
                         '<div class="content-subtitle">Criado por</div>' + '<div class="content-name">' +
                         newsAdmin.variables.jsonNews.CriadoPor + '</div>' + '<div class="status-date">' +
-                        newsAdmin
-                        .variables.createDate + '</div>' +
+                            newsAdmin.helpers.formatDate(newsAdmin.variables.jsonNews.UltimaModificacao) + '</div>' +
                         '<div class="content-subtitle">Modificado por</div>' + '<div class="content-name">' +
                         newsAdmin.variables.jsonNews.ModificadoPor + '</div>' + '<div class="status-date">' +
                         newsAdmin.helpers.formatDate(newsAdmin.variables.jsonNews.UltimaModificacao) + '</div>';
@@ -1251,13 +1343,11 @@
                         '<div class="content-subtitle">Nome da unidade</div>' + '<div class="content-name">' +
                         newsAdmin.variables.jsonNews.Unidade + '</div>' +
                         '<div class="content-subtitle" >Nome do grupo</div>' +
-                        '<div class="content-name">Equipe: ' + newsAdmin.variables.jsonNews.Grupo + '</div>' +
+                        '<div class="content-name">' + newsAdmin.variables.jsonNews.Grupo + '</div>' +
                         '<div class="container-panel-buttons"><a class="btn btn-publish-sidepanel" onclick="newsAdmin.api.updateNews()">Publicar</a><a class="btn" onclick="newsAdmin.sidebar.closeSidePanel()">Cancelar</a></div>';
 
 
                     document.querySelector('.content').innerHTML = status + info + aud;
-
-
                 },
 
                 viewSidePanel: function () {
@@ -1272,6 +1362,7 @@
 
                     var status = '<div class="details-title"> Detalhes </div> <div class="status-title">' +
                         newsAdmin.variables.jsonNews.Titulo + '</div>' +
+                        
                         '<div class="content-title">' + newsAdmin.variables.jsonNews.Status + '</div>' +
                         '<div class="status-public">Publicada</div>' +
                         '<div class="status-date">' + newsAdmin.helpers.formatDate(newsAdmin.variables.jsonNews
@@ -1282,8 +1373,7 @@
                     var info = '<div class="content-title">Informações da notícia</div>' +
                         '<div class="content-subtitle">Criado por</div>' + '<div class="content-name">' +
                         newsAdmin.variables.jsonNews.CriadoPor + '</div>' + '<div class="status-date">' +
-                        newsAdmin
-                        .variables.createDate + '</div>' +
+                            newsAdmin.helpers.formatDate(newsAdmin.variables.jsonNews.Publicacao) + '</div>' +
                         '<div class="content-subtitle">Modificado por</div>' + '<div class="content-name">' +
                         newsAdmin.variables.jsonNews.ModificadoPor + '</div>' + '<div class="status-date">' +
                         newsAdmin.helpers.formatDate(newsAdmin.variables.jsonNews.UltimaModificacao) + '</div>';
@@ -1318,15 +1408,10 @@
                         '<input class="input" type="hidden" id="newsName" name="newsName" value="' + newsAdmin
                         .variables.nameNews + '">' +
 
-                        '<div class="content-subtitle">Descrição da notícia</div>' +
-                        '<div class="input__container">' +
-                        '<input class="input" placeholder="Digite a descrição da notícia" type="text" id="newsDesc" name="newsDesc">' +
-                        '</div>' +
-
                         '<div class="content-title">Agende sua notícia</div>' +
                         '<div class="content-subtitle">Data de publicação</div>' +
                         '<div class="input__container">' +
-                        '<input class="input" placeholder="Digite seu nome" type="date" data-date-inline-picker="true" id="date" name="date">' +
+                        '<input class="input" placeholder="" type="date" data-date-inline-picker="true" id="date" name="date">' +
                         '</div>'
                     var status_1 =
                         '<div class="content-title">Ajude as pessoas a encontrarem sua notícia</div>';
@@ -1372,8 +1457,8 @@
                 },
 
                 publishSucessSidePanel: function () {
-                    var newsData = newsAdmin.variables.jsonNews;
-
+                    var date = newsAdmin.helpers.formateDate3($('#date').val());
+                    
                     var element = document.querySelector('#sidebar-shortcuts');
                     element.classList.add("side-panel-block");
                     var element1 = document.querySelector('.submenu-bar');
@@ -1383,18 +1468,32 @@
                     var status =
                         '<div class="details-title"> Notícia publicada! </div> <div class="status-title"> ' +
                         newsAdmin.variables.nameNews + ' </div>' +
-                        '<div class="content-title-date">Data de publicação: ' + newsData.Publicacao + '</div>';
+                        '<div class="content-title-date">Data de publicação: ' + date + '</div>';
                     var info = '<div class="content-subtitle">Endereço da notícia</div>';
-                    var link = '<div class="copy-link">link</div>';
+                    var href = window.location.origin +'/SitePages/noticias.aspx';
+                    var link = '<div class="copy-link"><a target="_blank" href="'+ href +'">'+ href +'</a></div>';
                     var button =
                         '<br><button onclick="newsAdmin.sidebar.closeSidePanel()" id="close" class="btn">Fechar</button>'
                     document.querySelector('.content').innerHTML = status + info + link + button;
 
                     $(".news-name").text('Nome da notícia');
+                    newsAdmin.variables.imgBase64 = "";
+                    newsAdmin.variables.fileName = "";
+                    $("#newsDesc").val("");
+
+                    $("#preview").attr("src", "/SitePages/src/Images/img_placeholder@3x.png");
                 }
             },
 
             helpers: {
+                goToNews: function() {
+                    window.open("/SitePages/noticia-page.aspx/?id=" + newsAdmin.variables.idNews, "_blank");
+                },
+
+                getPageInfo: function() {
+                    newsAdmin.variables.pageUrl = _spPageContextInfo.webAbsoluteUrl;
+                },
+
                 /** Define a classe do texto baseado no status */
                 setStatusStyle: function (status) {
                     return {
@@ -1409,7 +1508,7 @@
                     return '<div class="dropdown custom-dropdown">' +
                         '<img class="news__more dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" src="/SitePages/src/Icones/icone-mais-azul.png">' +
                         '<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">' +
-                        (status !== 'Arquivado' ? '<li><a href="#">Ir para notícia</a></li>' :
+                        (status !== 'Arquivado' ? '<li><a onclick="newsAdmin.helpers.goToNews()" href="#">Ir para notícia</a></li>' :
                             '<li><a onclick="newsAdmin.api.publishArchivedNews()" href="#">Publicar</a></li>'
                         ) +
                         '<li><a href="#" onclick="newsAdmin.sidebar.editSidePanel()">Editar</a></li>' +
@@ -1427,17 +1526,25 @@
                         newsAdmin.variables.jsonNews = JSON.parse($(this).parent().parent().parent()
                             .find('input').val());
                         newsAdmin.variables.idNews = newsAdmin.variables.jsonNews.Id;
-
-                        console.log(newsAdmin.variables.jsonNews);
                     });
                 },
 
                 formatDate: function (date) {
-                    var newDate = new Date(date) // formated_Date - SDK returned date
+                    var newDate = new Date(date)
                     var formattedDate = ("0" + newDate.getDate()).substr(-2) + "/" +
                         ("0" + (newDate.getMonth() + 1)).substr(-2) + "/" + newDate.getFullYear();
 
                     return formattedDate;
+                },
+
+                formatDate2: function(date) {
+                    return new Date(new Date(date).toString().split('GMT')[0]+' UTC').toISOString().split('.')[0];
+                },
+
+                // entry: yyyy-mm-dd
+                formateDate3: function(inputDate) {
+                    var p = inputDate.split(/\D/g);
+                    return [p[2],p[1],p[0] ].join("/");
                 },
 
                 /**
@@ -1449,7 +1556,6 @@
                     newsAdmin.api.getAllNews('#table-archived-news', 'false');
                     newsAdmin.helpers.handleClickMore();
                     newsAdmin.variables.idNews = "";
-                    newsAdmin.variables.jsonNews = "";
                 },
 
                 showCreatePage: function () {
@@ -1487,25 +1593,70 @@
                 changeImage: function (input) {
                     var reader;
 
+
                     if (input.files && input.files[0]) {
                         reader = new FileReader();
 
                         reader.onload = function (e) {
                             preview.setAttribute('src', e.target.result);
+                            newsAdmin.variables.imgBase64 = e.target.result;
                         }
 
                         reader.readAsDataURL(input.files[0]);
+                        newsAdmin.variables.fileName = input.files[0].name;
+
+                        
+
                     }
+
                 },
 
+                uploadFile: function() {  
+                    //Get Client Context,Web and List object.  
+                    var clientContext = new SP.ClientContext();  
+                    var oWeb = clientContext.get_web();  
+                    var oList = oWeb.get_lists().getByTitle(newsAdmin.variables.folderName);  
+                    
+                    //Convert the file contents into base64 data  
+                    var bytes = new Uint8Array(newsAdmin.variables.imgBase64);  
+                    var i, length, out = '';  
+                    for (i = 0, length = bytes.length; i < length; i += 1) {  
+                        out += String.fromCharCode(bytes[i]);  
+                    }  
+                    var base64 = btoa(out);  
+                    //Create FileCreationInformation object using the read file data  
+                    var createInfo = new SP.FileCreationInformation();  
+
+                    console.log("base64___________________: ", base64)
+                    console.log("bytes: ", bytes)
+                    console.log("newsAdmin.variables.imgBase64: ", newsAdmin.variables.imgBase64)
+
+                    createInfo.set_content(newsAdmin.variables.imgBase64);  
+                    createInfo.set_url(newsAdmin.variables.fileName);
+                    
+                    //Add the file to the library  
+                    var uploadedDocument = oList.get_rootFolder().get_files().add(createInfo)  
+                    //Load client context and execcute the batch  
+                    clientContext.load(uploadedDocument);  
+                    clientContext.executeQueryAsync(function() {}, function(sender, args) {
+                        console.log('Request failed with error message - ' + args.get_message() + ' . Stack Trace - ' + args.get_stackTrace());  
+                        alert("Request failed with error message - " + args.get_message() + " . Stack Trace - " + args.get_stackTrace());  
+                    });  
+                },
+
+               
+
                 transformToInput: function (obj) {
-                    console.log(obj)
                     $(".create-panel__name").html(
                         "<input onblur='newsAdmin.helpers.handleBlurInput(this)' id='inputNewsTitle' name='inputNewsTitle' type='text' class='input-edit-title panel-content' value='" +
                         obj.innerHTML + "' />");
+
+                        $(this).focus().select();
                 },
 
                 handleBlurInput: function (input) {
+                    if(!$(input).val()) return; 
+                    
                     $(".create-panel__name").html(
                         "<p class='news-name panel-content' onclick='newsAdmin.helpers.transformToInput(this)'>" +
                         $(input).val() + "</p>"
@@ -1516,29 +1667,6 @@
 
 
                 buildDropdownOptions: function (data) {
-                    // var data = {
-                    //     "Empresas":[
-                    //         {"empresa":"Ypê"},
-                    //         {"empresa":"Tix"}
-                    //     ],
-                    //     "Unidades":[
-                    //         {"unidade":"Amparo","Quantidade":0},
-                    //         {"unidade":"Salto","Quantidade":0},
-                    //         {"unidade":"Goiânia","Quantidade":0},
-                    //         {"unidade":"Anápolis","Quantidade":0},
-                    //         {"unidade":"Simões Filho","Quantidade":0},
-                    //         {"unidade":"Comercial","Quantidade":0}
-                    //     ],
-                    //     "Cargos":[
-                    //         {"cargo":"Equipe","Quantidade":0},
-                    //         {"cargo":"Especialista","Quantidade":0},
-                    //         {"cargo":"Supervisor","Quantidade":0},
-                    //         {"cargo":"Coordenador","Quantidade":0},
-                    //         {"cargo":"Gerente","Quantidade":0},
-                    //         {"cargo":"Diretoria","Quantidade":0}
-                    //     ]
-                    // }
-
                     data.Empresas.map(function (e) {
                         $("#selectCompany").append('<option value="' + e.empresa + '">' + e.empresa +
                             '</option>');
@@ -1553,10 +1681,18 @@
                         $("#selectGroup").append('<option value="' + c.cargo + '">' + c.cargo +
                             '</option>');
                     });
+                },
 
+                appendNewField: function() {
+                    $(".create-panel-options").prepend('<div class="content-subtitle">Descrição da notícia</div>' +
+                        '<div class="input__container">' +
+                        '<input class="input" placeholder="Insira a descrição da notícia" type="text" id="newsDesc" name="newsDesc">' +
+                    '</div>');
 
-                }
+                    $(".create-panel-options__line__button").addClass('disable-button');
+                },
 
+                
 
             }
         }
