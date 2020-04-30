@@ -19,7 +19,7 @@
   "homepage": "https://github.com/rafaelmoraisneves/ype-enquetes-admin#readme",
   "dependencies": {
     "bootstrap": "^3.4.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "@babel/polyfill": "^7.7.0",
     "core-js": "^2.6.11",
     "ky": "^0.16.1",
